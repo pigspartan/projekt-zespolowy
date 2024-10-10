@@ -10,10 +10,19 @@
 <body>
     <header>
         <nav>
-            <h1>Nav</h1>
-            <a href="{{ route('index') }}">Home</a>
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Register</a>
+        @guest
+        <a href="{{ route('index') }}">Home</a>
+        <a href="{{ route('login') }}">Login</a>
+        <a href="{{ route('register') }}">Register</a>
+        @endguest
+        <h1>Nav</h1>
+        @auth
+        <p class="username">{{auth()->user()->name}}</p>
+        <form action="{{ route('logout') }}" method="post">
+        @csrf 
+        <button>logout</button>
+        </form>
+        @endauth
         </nav>
     </header>
     <main>
