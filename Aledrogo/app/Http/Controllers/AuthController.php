@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     // Register User
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         // Validate
         $registerData = $request->validate([
             'name' => ['required', 'max:32'],
@@ -27,7 +28,28 @@ class AuthController extends Controller
         return redirect()->route('index');
     }
 
-    public function login(Request $request){
-        dd($request);
+    public function login(Request $request)
+    {
+        $loginData = $request->validate([
+            'email' => ['required', 'max:64', 'email'],
+            'password' => ['required', 'min:4'],
+        ]);
+
+        if(Auth::attempt($loginData,$request->remember))
+        {
+            return redirect()->intended();
+            //dd($request);
+        }else
+        {
+            return back()->withErrors(['failed'=>'bad credentials']);
+        };
+        
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regeneratetoken();
+        return redirect()->route('index');
     }
 }
