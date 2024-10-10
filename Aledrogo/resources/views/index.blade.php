@@ -1,6 +1,6 @@
 <x-layout>
 
-    <p>Helo to my Viscous Guide and Overview</p>
+    <p>Helo to my Viscous Guide</p>
 
 </x-layout>
 
