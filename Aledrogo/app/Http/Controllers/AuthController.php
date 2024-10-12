@@ -43,7 +43,7 @@ class AuthController extends Controller
         {
             return back()->withErrors(['failed'=>'bad credentials']);
         };
-        
+
     }
     public function logout(Request $request)
     {

@@ -19,7 +19,7 @@
         @auth
         <p class="username">{{auth()->user()->name}}</p>
         <form action="{{ route('logout') }}" method="post">
-        @csrf 
+        @csrf
         <button>logout</button>
         </form>
         @endauth
