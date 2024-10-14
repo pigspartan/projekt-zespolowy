@@ -6,7 +6,7 @@ use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class ListingController extends Controller
@@ -39,6 +39,13 @@ class ListingController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
         ]);
+        $pathraw = Storage::disk('public')->put('img',$request->file);
+        //Storage::disk('public')->put('img',$request->file);
+        //$pathraw = $request->file('file')->storePublicly('storage');
+        $pathbroken=explode('/',$pathraw);
+        $path=$pathbroken[1];
+        $fields['path'] = $path;
+        //dd($pathraw);
         Auth::user()->listings()->create($fields);
         return back()->with('succes','post added');
     }

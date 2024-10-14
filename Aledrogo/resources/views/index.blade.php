@@ -3,9 +3,10 @@
 
     @auth
         <h1 class="m-8">Hello to my Viscous Guide and Overview</h1>
-        <form action="{{route('listings.store')}}" method="POST">
+        <form action="{{route('listings.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
+
                 <label for="title">title</label>
                 <input type="text" name="title" value="{{ old('title') }}">
                 @error('title')
@@ -15,6 +16,13 @@
             <div>
                 <label for="content">content</label>
                 <textarea rows="5" name="content">{{ old('content') }}</textarea>
+                @error('content')
+                    <p>{{ $message }}</p>
+                @enderror
+            </div>
+            <div>
+                <label for="file">content</label>
+                <input type="file" name="file" >
                 @error('content')
                     <p>{{ $message }}</p>
                 @enderror
