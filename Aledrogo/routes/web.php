@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 

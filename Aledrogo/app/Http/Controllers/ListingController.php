@@ -44,7 +44,7 @@ class ListingController extends Controller
         }
 
         $fields['path'] = $path;
-        Auth::user()->listings()->create($fields);
+        request()->user()->listings()->create($fields);
         return back()->with('succes','post added');
     }
 

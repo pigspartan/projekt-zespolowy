@@ -16,6 +16,5 @@
     @guest
 
     @endguest
-
 </x-layout>
 
