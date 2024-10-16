@@ -16,6 +16,5 @@
     @guest
 
     @endguest
-    <p class="m-8">content strony głównej</p>
 </x-layout>
 
