@@ -3,34 +3,15 @@
 
     @auth
         <h1 class="m-8">Hello to my Viscous Guide and Overview</h1>
-        <form action="{{route('listings.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div>
-
-                <label for="title">title</label>
-                <input type="text" name="title" value="{{ old('title') }}">
-                @error('title')
-                    <p>{{ $message }}</p>
-                @enderror
-            </div>
-            <div>
-                <label for="content">content</label>
-                <textarea rows="5" name="content">{{ old('content') }}</textarea>
-                @error('content')
-                    <p>{{ $message }}</p>
-                @enderror
-            </div>
-            <div>
-                <label for="file">content</label>
-                <input type="file" name="file" >
-                @error('content')
-                    <p>{{ $message }}</p>
-                @enderror
-            </div>
-            <button>create</button>
-        </form>
-         <p>{{session('succes')}}</p>
+        <button onclick="location.href='{{route('listItem')}}'">Dodaj ogłoszenie</button>
     @endauth
+
+    @foreach ($listings as $item)
+        <h2>{{$item->title}}</h2>
+        <p>{{$item->content}}</p>
+        <h3>{{$item->user->name}}</h3>
+        <img src={{asset('storage/'.$item->path)}} alt="huhma">
+    @endforeach
 
     @guest
 

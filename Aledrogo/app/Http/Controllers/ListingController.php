@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -17,7 +16,7 @@ class ListingController extends Controller
     public function index()
     {
         $listings = Listing::all();
-        return view('listings.index',['listings'=>$listings]);
+        return view('index',['listings'=>$listings]);
     }
 
     /**
@@ -33,19 +32,18 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $fields = $request->validate([
             'title' => ['required', 'max:255'],
             'content' => ['required'],
+            'file' => ['required', 'image'],
         ]);
-        $pathraw = Storage::disk('public')->put('img',$request->file);
-        //Storage::disk('public')->put('img',$request->file);
-        //$pathraw = $request->file('file')->storePublicly('storage');
-        $pathbroken=explode('/',$pathraw);
-        $path=$pathbroken[1];
+
+        $path = null;
+        if ($request->hasFile('file')){
+            $path = Storage::disk('public')->put('img',$request->file);
+        }
+
         $fields['path'] = $path;
-        //dd($pathraw);
         Auth::user()->listings()->create($fields);
         return back()->with('succes','post added');
     }

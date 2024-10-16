@@ -37,8 +37,7 @@ class AuthController extends Controller
 
         if(Auth::attempt($loginData,$request->remember))
         {
-            return redirect()->intended();
-            //dd($request);
+            return redirect()->intended('');
         }else
         {
             return back()->withErrors(['failed'=>'bad credentials']);

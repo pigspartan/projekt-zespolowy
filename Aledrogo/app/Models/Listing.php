@@ -11,7 +11,7 @@ class Listing extends Model
     protected $fillable = [
         'title',
         'content',
-        'path'
+        'path',
     ];
 
     public function user(): BelongsTo
