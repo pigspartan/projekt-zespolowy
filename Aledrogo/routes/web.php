@@ -17,12 +17,15 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::view('/', 'index')->name('index');
-Route::get('/{perPage?}', [ListingController::class, 'index'])->name('index');
 Route::resource('/',ListingController::class);
 
 Route::view('/create', 'listings.create')->middleware('auth')->name('listItem');
 Route::resource('listings', ListingController::class);
 
+Route::get('/{perPage?}', [ListingController::class, 'index'])->name('perPage');
+
+
+
+
 
 //Route::view('/listings','listings.index')->name('home');
-
