@@ -11,7 +11,7 @@
                 <p>Description: {{$item->content}}</p>
                 <p>Seller:<a href="backend.html"> {{$item->user->name}}</a></p>
             </div>
-            <button onclick="location.href='{{route('indexc')}}'" class="border-2 rounded w-20 h-20 mt-auto mb-auto ml-auto mr-32 bg-amber-300 text-black">BUY</button>
+            <button onclick="location.href='{{route('index')}}'" class="border-2 rounded w-20 h-20 mt-auto mb-auto ml-auto mr-32 bg-amber-300 text-black">BUY</button>
         </div>
         @endforeach
 
