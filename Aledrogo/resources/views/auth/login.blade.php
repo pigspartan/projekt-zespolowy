@@ -15,7 +15,7 @@
             </div>
             @error('failed')
                     <p>{{ $message }}</p>
-                @enderror
+            @enderror
             <div class="max-w-screen-md flex flex-col flex-wrap items-center justify-between mx-auto p-4">
                 <button class="text-xl content-center border-2 p-2">Login</button>
                 <div class="max-w-screen-md items-center justify-between mx-auto p-4">

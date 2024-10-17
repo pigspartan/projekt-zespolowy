@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
 
 
 class ListingController extends Controller
@@ -13,10 +13,16 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($perPage = 2)
     {
-        $listings = Listing::all();
-        return view('index',['listings'=>$listings]);
+        if ($perPage != 2 && $perPage != 5 && $perPage != 10 && $perPage != 50){
+            $perPage = 2;
+        }
+
+        $listings = Listing::latest()->paginate($perPage);
+
+
+        return view('index',['listings'=>$listings,'perPage'=>$perPage]);
     }
 
     /**
