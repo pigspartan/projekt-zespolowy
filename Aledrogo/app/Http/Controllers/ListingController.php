@@ -15,6 +15,7 @@ class ListingController extends Controller
      */
     public function index($perPage = 2)
     {
+        //dd($perPage);
         if ($perPage != 2 && $perPage != 5 && $perPage != 10 && $perPage != 50){
             $perPage = 2;
         }
