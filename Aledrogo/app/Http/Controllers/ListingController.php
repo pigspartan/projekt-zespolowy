@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,9 +59,12 @@ class ListingController extends Controller
     /**1
      * Display the specified resource.
      */
-    public function show(Listing $listing)
+    public function show($id)
     {
-        //
+
+        $item = Listing::findOrFail($id);
+        //dd($item);
+        return view('listings.details',['item' => $item]);
     }
 
     /**
