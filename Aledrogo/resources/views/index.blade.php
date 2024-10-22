@@ -32,8 +32,10 @@
         @endforeach
     </div>
 
-    <div>
-        {{ $listings->links() }}
+    <div class="items-center flex" style="width:100%;">
+        <div style="margin:auto">
+            {{ $listings->links() }}
+        </div>
     </div>
 
     @guest

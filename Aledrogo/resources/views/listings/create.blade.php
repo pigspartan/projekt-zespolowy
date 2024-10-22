@@ -1,30 +1,32 @@
 <x-layout>
 
+    <div class="border-2" style="align-content: center; width:50%; min-width:max-content; margin:auto; margin-top:20px">
     <form action="{{ route('listings.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div>
-            <label for="title">title</label>
+        <div class="m-8">
+            <label for="title">Title</label>
             <input type="text" name="title" value="{{ old('title') }}">
             @error('title')
                 <p>{{ $message }}</p>
             @enderror
         </div>
-        <div>
-            <label for="content">content</label>
+        <div class="m-8 flex">
+            <label for="content" style="margin-right:10px;">Description</label>
             <textarea class="text-black" rows="5" name="content">{{ old('content') }}</textarea>
             @error('content')
                 <p>{{ $message }}</p>
             @enderror
         </div>
-        <div>
-            <label for="file">content</label>
+        <div class="m-8">
+            <label for="file">Photo</label>
             <input type="file" name="file" >
             @error('file')
                 <p>{{ $message }}</p>
             @enderror
         </div>
-        <button>create</button>
+        <button class="border-2 rounded bg-indigo-900 flex" style="padding:5px 15px 5px 15px;margin:auto; margin-bottom:20px">Add</button>
     </form>
-    <p>{{ session('succes') }}</p>
+    <p>{{ session('succes') }}</p>  
+    </div>
 
 </x-layout>

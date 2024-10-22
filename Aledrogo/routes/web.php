@@ -23,10 +23,3 @@ Route::view('/create', 'listings.create')->middleware('auth')->name('listItem');
 Route::resource('listings', ListingController::class);
 
 Route::get('/{perPage?}', [ListingController::class, 'index'])->name('perPage');
-
-
-
-
-
-//Route::view('/listings','listings.index')->name('home');
-
