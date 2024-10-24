@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 
@@ -11,10 +12,11 @@ Route::middleware('auth')->group(function () {
     Route::view('/logout', 'auth.logout')->name('logout');
     Route::post('/logout', [AuthController::class, 'logout']);
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
 
-    Route::view('/item/', 'listings.details')->name('details');
+    // Route::view('/item/', 'listings.details')->name('details');
     Route::get('/item/{id}', [ListingController::class, 'show'])->name('itemDetails');
-
 
     Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');

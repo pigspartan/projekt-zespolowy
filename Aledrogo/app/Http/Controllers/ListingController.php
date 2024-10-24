@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-
+use function Pest\Laravel\patch;
 
 class ListingController extends Controller
 {
@@ -86,8 +86,16 @@ class ListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Listing $listing)
+    public function destroy($id)
     {
-        //
+
+        $path = DB::table('listings')->where('id',$id)->firstOrFail()->path;
+
+        Storage::disk('public')->delete($path);
+
+        Listing::destroy($id);
+
+
+        return redirect()->back();
     }
 }

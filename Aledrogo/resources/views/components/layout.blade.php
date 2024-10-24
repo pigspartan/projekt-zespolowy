@@ -29,7 +29,7 @@
                     <button class="m-2" onclick="location.href='{{route('listItem')}}'">placeholder4</button>
                 </div>
                 <div class="flex items-end space-x-3 rtl:space-x-reverse">
-                    <p class="username text-2xl">{{auth()->user()->name}}</p>
+                    <p class="username text-2xl"><a href="{{route('dashboard')}}">{{auth()->user()->name}}</a></p>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="border ml-2 mr-2 p-1 rounded">logout</button>
