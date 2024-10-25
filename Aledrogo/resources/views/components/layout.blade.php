@@ -32,7 +32,7 @@
                     <p class="username text-2xl hover:bg-indigo-800 p-1 border-r border-l rounded-lg"><a href="{{route('dashboard')}}">{{auth()->user()->name}}</a></p>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="border ml-2 mr-2 p-1 rounded- hover:bg-indigo-800">logout</button>
+                        <button class="border ml-2 mr-2 p-1 rounded hover:bg-indigo-800">logout</button>
                     </form>
                 </div>
             @endauth
@@ -41,13 +41,13 @@
     <main>
         {{ $slot }}
     </main>
-    {{-- <footer class="mt-8">
+    <footer class="mt-8">
         <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4" aria-label="Global">
             @guest
             @endguest
             @auth
             @endauth
         </nav>
-    </footer> --}}
+    </footer>
 </body>
 </html>

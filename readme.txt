@@ -10,7 +10,9 @@ npm run build
 php artisan serve
 
 //Zdjęcia
-php artisan storage:link
+1. backup zdjec
+2. usun folder /public/storage
+3. php artisan storage:link
 
 //Tailwind
 npm install -D tailwindcss postcss autoprefixer
