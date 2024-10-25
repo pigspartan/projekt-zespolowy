@@ -16,3 +16,12 @@ php artisan storage:link
 npm install -D tailwindcss postcss autoprefixer
 npm run build
 
+//mail  w.env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=f26e99ed9ea54a
+MAIL_PASSWORD=6f08b6d0e52ad2
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="alledrogoTeam@pylote.com"
+MAIL_FROM_NAME="${APP_NAME}"
