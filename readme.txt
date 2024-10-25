@@ -11,3 +11,8 @@ php artisan serve
 
 //Zdjęcia
 php artisan storage:link
+
+//Tailwind
+npm install -D tailwindcss postcss autoprefixer
+npm run build
+
