@@ -22,17 +22,17 @@
             @endguest
             @auth
                 <div class="flex items-start">
-                    <button class="m-2" onclick="location.href='{{route('listItem')}}'">Dodaj ogłoszenie</button>
-                    <button class="m-2" onclick="location.href='{{route('listItem')}}'">placeholder1</button>
-                    <button class="m-2" onclick="location.href='{{route('listItem')}}'">placeholder2</button>
-                    <button class="m-2" onclick="location.href='{{route('listItem')}}'">placeholder3</button>
-                    <button class="m-2" onclick="location.href='{{route('listItem')}}'">placeholder4</button>
+                    <button class="m-2 p-1 hover:bg-indigo-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">Dodaj ogłoszenie</button>
+                    <button class="m-2 p-1 hover:bg-indigo-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder1</button>
+                    <button class="m-2 p-1 hover:bg-indigo-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder2</button>
+                    <button class="m-2 p-1 hover:bg-indigo-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder3</button>
+                    <button class="m-2 p-1 hover:bg-indigo-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder4</button>
                 </div>
                 <div class="flex items-end space-x-3 rtl:space-x-reverse">
-                    <p class="username text-2xl"><a href="{{route('dashboard')}}">{{auth()->user()->name}}</a></p>
+                    <p class="username text-2xl hover:bg-indigo-800 p-1 border-r border-l rounded-lg"><a href="{{route('dashboard')}}">{{auth()->user()->name}}</a></p>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="border ml-2 mr-2 p-1 rounded">logout</button>
+                        <button class="border ml-2 mr-2 p-1 rounded hover:bg-indigo-800">logout</button>
                     </form>
                 </div>
             @endauth

@@ -14,7 +14,7 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($perPage = 2)
+    public function index($perPage = 5)
     {
         //dd($perPage);
         if ($perPage != 2 && $perPage != 5 && $perPage != 10 && $perPage != 50){
