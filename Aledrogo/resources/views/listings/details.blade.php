@@ -14,5 +14,4 @@
             </div>
         </div>
     </div>
-    <br><p>{{$item}}</p>
 </x-layout>

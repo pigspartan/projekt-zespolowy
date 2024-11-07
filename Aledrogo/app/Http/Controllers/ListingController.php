@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 use function Pest\Laravel\patch;
@@ -88,6 +89,10 @@ class ListingController extends Controller
      */
     public function destroy($id)
     {
+
+        $listing = Listing::findOrFail($id);
+
+        Gate::authorize('delete',$listing);
 
         $path = DB::table('listings')->where('id',$id)->firstOrFail()->path;
 
