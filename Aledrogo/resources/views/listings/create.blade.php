@@ -1,6 +1,7 @@
 <x-layout>
 
     <div class="border-2" style="align-content: center; width:50%; min-width:max-content; margin:auto; margin-top:20px">
+        <h1 class="text-center text-3xl p-4 bg-blue-900">Add a new listing</h1>
     <form action="{{ route('listings.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="m-8">
