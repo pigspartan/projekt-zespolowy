@@ -23,18 +23,18 @@
         <div class="flex justify-center items-center bg-sky-700">
             <div class="flex justify-center items-center space-x-4 mx-auto">
                 <select class="text-black m-2 rounded p-2" onchange="window.location.href=this.value" name="perPage" id="perPage">
+                    <option @if ($perPage == 2)
+                        selected="selected"
+                    @endif value="{{route('perPage',['perPage' => 2])}}">2</option>
                     <option @if ($perPage == 5)
-                                selected="selected"
+                        selected="selected"
                     @endif value="{{route('perPage',['perPage' => 5])}}">5</option>
                     <option @if ($perPage == 10)
-                                selected="selected"
+                        selected="selected"
                     @endif value="{{route('perPage',['perPage' => 10])}}">10</option>
                     <option @if ($perPage == 50)
-                                selected="selected"
+                        selected="selected"
                     @endif value="{{route('perPage',['perPage' => 50])}}">50</option>
-                    <option @if ($perPage == 2)
-                                selected="selected"
-                            @endif value="{{route('perPage',['perPage' => 2])}}">2</option>
                 </select>
                 <div id="strony" class="m-2">
                     {{ $listings->links() }}

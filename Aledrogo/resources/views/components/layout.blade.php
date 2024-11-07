@@ -41,13 +41,13 @@
     <main>
         {{ $slot }}
     </main>
-    <footer class="mt-8">
+    {{-- <footer class="mt-8">
         <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4" aria-label="Global">
             @guest
             @endguest
             @auth
             @endauth
         </nav>
-    </footer>
+    </footer> --}}
 </body>
 </html>
