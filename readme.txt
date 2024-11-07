@@ -28,3 +28,6 @@ npm run build
 npm run watch
 //uruchomić drugą konsolę
 //php artisan serve
+
+//mail  w.env
+zróbcie konto na mailtrapie i skopiujcie PHP->laravel 9+ do .env

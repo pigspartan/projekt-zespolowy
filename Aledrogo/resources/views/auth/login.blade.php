@@ -26,7 +26,7 @@
                 </div>
             </form>
             <div class="max-w-screen-md flex flex-col flex-wrap items-center justify-between mx-auto p-2">
-                <form action="{{route('login')}}"><button class="text-sm content-center p-0.5">i forgor 💀</button></form>
+                <form action="{{route('password.request')}}"><button class="text-sm content-center p-0.5">i forgor 💀</button></form>
             </div>
         </div>
     </div>
