@@ -25,9 +25,16 @@
                 <p>{{ $message }}</p>
             @enderror
         </div>
+        <div class="m-8 flex">
+            <label for="content" style="margin-right:10px;">price</label>
+            <input type="number "step="0.01" name="price" value="{{ old('title') }}">
+            @error('content')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
         <button class="border-2 rounded bg-indigo-900 flex" style="padding:5px 15px 5px 15px;margin:auto; margin-bottom:20px">Add</button>
     </form>
-    <p>{{ session('succes') }}</p>  
+    <p>{{ session('succes') }}</p>
     </div>
 
 </x-layout>
