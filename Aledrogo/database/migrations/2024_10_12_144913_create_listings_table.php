@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('path');
             $table->timestamps();
+            $table->float('price',2);
         });
     }
 

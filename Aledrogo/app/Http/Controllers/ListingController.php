@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 use function Pest\Laravel\patch;
@@ -14,7 +15,7 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($perPage = 2)
+    public function index($perPage = 5)
     {
         //dd($perPage);
         if ($perPage != 2 && $perPage != 5 && $perPage != 10 && $perPage != 50){
@@ -44,6 +45,7 @@ class ListingController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'file' => ['required', 'image'],
+            'price'=>['required']
         ]);
 
         $path = null;
@@ -88,6 +90,10 @@ class ListingController extends Controller
      */
     public function destroy($id)
     {
+
+        $listing = Listing::findOrFail($id);
+
+        Gate::authorize('delete',$listing);
 
         $path = DB::table('listings')->where('id',$id)->firstOrFail()->path;
 

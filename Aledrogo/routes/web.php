@@ -2,7 +2,9 @@
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('index');
@@ -29,9 +31,21 @@ Route::middleware('guest')->group(function () {
 
     Route::view('/login', 'auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+
+    Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+    Route::post('/forgot-password',[ResetPasswordController::class, 'passwordEmail']);
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 });
+
+
 
 Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->name('listItem');
 Route::resource('listings', ListingController::class);
 
 Route::get('/{perPage?}', [ListingController::class, 'index'])->name('perPage');
+
+use App\Http\Controllers\PayPalController;
+
+Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])->name('paypal.createPayment');
+Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');
