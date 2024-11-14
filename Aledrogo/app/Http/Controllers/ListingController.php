@@ -28,6 +28,12 @@ class ListingController extends Controller
         return view('index',['listings'=>$listings,'perPage'=>$perPage]);
     }
 
+    public function userListings($id, $perPage = 5){
+        $listings = Listing::where('user_id',$id)->latest()->paginate($perPage);
+
+        return view('userListings',['listings'=>$listings, 'perPage'=>$perPage]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -55,7 +61,8 @@ class ListingController extends Controller
 
         $fields['path'] = $path;
         request()->user()->listings()->create($fields);
-        return back()->with('succes','post added');
+        //return back()->with('succes','post added');
+        return redirect()->route('index');
     }
 
     /**1
