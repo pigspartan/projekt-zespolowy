@@ -45,6 +45,7 @@ class ListingController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'file' => ['required', 'image'],
+            'price'=>['required']
         ]);
 
         $path = null;

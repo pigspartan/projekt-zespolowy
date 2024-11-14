@@ -45,4 +45,7 @@ Route::resource('listings', ListingController::class);
 
 Route::get('/{perPage?}', [ListingController::class, 'index'])->name('perPage');
 
+use App\Http\Controllers\PayPalController;
 
+Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])->name('paypal.createPayment');
+Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');

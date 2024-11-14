@@ -12,6 +12,7 @@ class Listing extends Model
         'title',
         'content',
         'path',
+        'price'
     ];
 
     public function user(): BelongsTo
