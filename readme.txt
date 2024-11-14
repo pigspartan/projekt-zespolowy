@@ -31,3 +31,21 @@ npm run watch
 
 //mail  w.env
 zróbcie konto na mailtrapie i skopiujcie PHP->laravel 9+ do .env
+
+
+//paypal wstępnie 
+1. composer require srmklive/paypal
+2. php artisan vendor:publish --provider="Srmklive\PayPal\Providers\PayPalServiceProvider"
+3. do env   PAYPAL_CLIENT_ID=id twoje
+			PAYPAL_CLIENT_SECRET=klucz 
+			PAYPAL_MODE=sandbox
+
+
+
+
+paypal
+sb-wgzug33467579@business.example.com
+{pA31f.J
+
+sb-a3jpd33473419@personal.example.com
+GW}$F3?g
