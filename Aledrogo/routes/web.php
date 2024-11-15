@@ -44,6 +44,7 @@ Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->nam
 Route::resource('listings', ListingController::class);
 
 Route::get('/{perPage?}', [ListingController::class, 'index'])->name('perPage');
+Route::get('/userListings/{id}/{perPage?}', [ListingController::class, 'userListings'])->name('userListings');
 
 use App\Http\Controllers\PayPalController;
 
