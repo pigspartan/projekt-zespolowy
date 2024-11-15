@@ -23,7 +23,14 @@
             @auth
                 <div class="flex items-start">
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">Dodaj ogłoszenie</button>
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder1</button>
+                    <form action="{{ route('paypal.payout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl">wypłata</button>
+                    </form>
+
+
+
+
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder2</button>
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder3</button>
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder4</button>
@@ -50,4 +57,5 @@
         </nav>
     </footer> --}}
 </body>
+
 </html>

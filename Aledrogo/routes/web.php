@@ -49,3 +49,4 @@ use App\Http\Controllers\PayPalController;
 
 Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])->name('paypal.createPayment');
 Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');
+Route::post('/paypal/payout', [PayPalController::class, 'sendPayout'])->name('paypal.payout');

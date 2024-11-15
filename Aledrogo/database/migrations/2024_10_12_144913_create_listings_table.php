@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamps();
             $table->float('price',2);
         });
+
     }
 
     /**

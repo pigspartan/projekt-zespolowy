@@ -16,7 +16,7 @@ class AuthController extends Controller
         // Validate
         $registerData = $request->validate([
             'name' => ['required', 'max:32'],
-            'email' => ['required', 'max:64', 'email', 'unique:users'],
+            'email' => ['required', 'max:128', 'unique:users'], #na potrzeby testów bo nie lubi sie z dev mailami paypala 'email',
             'password' => ['required', 'min:4', 'confirmed'],
         ]);
 

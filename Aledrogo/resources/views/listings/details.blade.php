@@ -20,7 +20,7 @@
 
     <script>
         document.getElementById('kup').addEventListener('click', function() {
-            window.location.href = "{{ route('paypal.createPayment') }}?price=" + {{$item->price}};
+            window.location.href = "{{ route('paypal.createPayment') }}?Id=" + {{$item->id}};
         });
     </script>
 </x-layout>
