@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,7 @@ class PayPalController extends Controller
         if (isset($response['id']) && $response['status'] == 'CREATED') {
             foreach ($response['links'] as $link) {
                 if ($link['rel'] === 'approve') {
+                    DB::table('listings')->where('id', '=', $listing->id)->delete();
                     return redirect()->away($link['href']);
                 }
             }
