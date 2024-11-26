@@ -50,6 +50,19 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
             'password' => 'hashed',
         ];
     }
+    public function roles() {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
+
+    public function hasRole($role) {
+
+        return $this->roles()->where('name', $role)->exists();
+    }
+
+    public function assignRole($role){
+        $role = Role::where('name', $role)->firstOrFail();
+        $this->roles()->attach($role);
+    }
 
     public function listings() : HasMany
     {

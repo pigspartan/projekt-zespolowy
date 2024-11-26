@@ -1,8 +1,11 @@
 <?php
+
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
     Route::post('/email/verification-notification', [AuthController::class, 'verifyResend'])->middleware('throttle:6,1')->name('verification.send');
+
+    Route::get('/admin/dashboard',[AdminController::class, 'index'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.dashboard');
 });
 
 Route::middleware('guest')->group(function () {
