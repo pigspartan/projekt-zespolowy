@@ -127,6 +127,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/srmklive/paypal" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
