@@ -6,28 +6,40 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Middleware\SuspendedMiddleware;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('index');
-Route::resource('/',ListingController::class);
+Route::resource('/', ListingController::class);
+
 
 Route::middleware('auth')->group(function () {
-    Route::view('/logout', 'auth.logout')->name('logout');
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::middleware([SuspendedMiddleware::class])->group(function () {
+        Route::view('/logout', 'auth.logout')->name('logout');
+        Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
 
-    // Route::view('/item/', 'listings.details')->name('details');
-    Route::get('/item/{id}', [ListingController::class, 'show'])->name('itemDetails');
+        // Route::view('/item/', 'listings.details')->name('details');
+        Route::get('/item/{id}', [ListingController::class, 'show'])->name('itemDetails');
+        Route::get('/item/flag/{id}', [ListingController::class, 'flag'])->name('listing.flag');
+        Route::get('/item/unflag/{id}', [ListingController::class, 'unflag'])->name('listing.unflag');
 
-    Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
-    Route::post('/email/verification-notification', [AuthController::class, 'verifyResend'])->middleware('throttle:6,1')->name('verification.send');
+        Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
+        Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+        Route::post('/email/verification-notification', [AuthController::class, 'verifyResend'])->middleware('throttle:6,1')->name('verification.send');
 
-    Route::get('/admin/dashboard',[AdminController::class, 'index'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.dashboard');
+        Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.dashboard');
+        Route::get('/admin/user/delete/{id}', [AdminController::class, 'deleteUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.delete');
+        Route::get('/admin/user/restore/{id}', [AdminController::class, 'restoreUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.restore');
+        Route::get('/admin/user/suspend/{id}', [AdminController::class, 'suspendUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.suspend');
+    });
+
+    Route::view('/suspended', 'suspended')->name('suspended');
+
 });
 
 Route::middleware('guest')->group(function () {
@@ -38,7 +50,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
-    Route::post('/forgot-password',[ResetPasswordController::class, 'passwordEmail']);
+    Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail']);
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 });

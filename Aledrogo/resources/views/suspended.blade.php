@@ -1,0 +1,1 @@
+Jesteś zawieszony

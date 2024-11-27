@@ -7,7 +7,9 @@
                 <p class="p-4 text-xl">Opis: {{$item->content}}</p>
                 <a href="{{route('userListings',['id' => $item->user->id])}}" class="pl-4">Sprzedający: {{$item->user->name}}</a>
                 <div class="p-2 flex justify-center">
-                    <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button> <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>
+                    <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button>
+                    <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>
+                    <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button>
                 </div>
                 <p class="pt-2 text-right text-sm">Ogłoszenie utworzono: {{$item->created_at}}</p>
                 <p class="text-right text-sm">Ostatnia aktualizacja: {{$item->updated_at}}</p>

@@ -23,10 +23,13 @@ class AuthController extends Controller
         // Register
         $user = User::create($registerData);
 
+        $user->assignRole('User');
+
         // Login
         Auth::login($user);
 
         event(new Registered($user));
+
 
         // Redirect
         return redirect()->route('verification.notice');

@@ -7,19 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class SuspendedMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next,$role): Response
+    public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
 
-        if (!$user || !$user->hasRole($role)) {
-            return redirect('/');
+        dd('hello suspended bastard :>');
+
+        if (!$user || !$user->hasRole('Suspended')) {
+            return redirect('/suspended');
         }
 
         return $next($request);

@@ -64,6 +64,15 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         $this->roles()->attach($role);
     }
 
+    public function revokeRole($role){
+        $role = Role::where('name', $role)->firstOrFail();
+        $this->roles()->detach($role);
+    }
+
+    public function revokeAllRoles(){
+        $this->roles()->detach();
+    }
+
     public function listings() : HasMany
     {
         return $this->hasMany(Listing::class);

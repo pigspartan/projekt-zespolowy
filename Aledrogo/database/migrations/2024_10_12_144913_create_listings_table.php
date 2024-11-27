@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('path');
             $table->timestamps();
             $table->float('price',2);
+            $table->integer('is_flagged')->default(0);
         });
 
     }
