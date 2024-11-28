@@ -39,8 +39,9 @@
                     <div>
                         {{-- user->hasRole('nazwaRoli') żeby zobaczyć czy ma role;  --}}
                         <button onclick="location.href='{{route('admin.user.delete',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-orange-600 hover:bg-red-700 text-black">DELETE</button>
-                        <button onclick="location.href='{{route('admin.user.restore',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-green-600 hover:bg-green-700 text-black">RESTORE</button>
-                        @if ($item->id != auth()->user()->id)
+                        @if ($item->hasRole('Suspended'))
+                            <button onclick="location.href='{{route('admin.user.restore',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-green-600 hover:bg-green-700 text-black">RESTORE</button>
+                        @else
                             <button onclick="location.href='{{route('admin.user.suspend',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-amber-300 hover:bg-amber-500 text-black">SUSPEND</button>
                         @endif
 

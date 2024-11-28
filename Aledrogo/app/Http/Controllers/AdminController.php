@@ -6,6 +6,7 @@ use App\Models\Listing;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -15,7 +16,7 @@ class AdminController extends Controller
 
         $listings = Listing::where('is_flagged',1)->get();
 
-        $users = User::get();
+        $users = User::where('id','!=',Auth::id())->get();
 
         $roles = Role::get();
 
@@ -53,5 +54,13 @@ class AdminController extends Controller
         $user->assignRole('User');
 
         return redirect()->back()->with(['message'=> 'Użytkownik przywrócony']);
+    }
+
+    public function deleteUser($id){
+        DB::transaction(function () use ($id) {
+            DB::table('users')->delete($id);
+        });
+
+        return redirect()->back()->with(['message'=> 'Użytkownik usunięty']);
     }
 }
