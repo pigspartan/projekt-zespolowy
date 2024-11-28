@@ -27,11 +27,9 @@
                         @csrf
                         <button type="submit" class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl">wypłata</button>
                     </form>
-
-
-
-
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder2</button>
+                    @role('Admin')
+                        <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">Admin dashboard</button>
+                    @endrole
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder3</button>
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder4</button>
                 </div>
