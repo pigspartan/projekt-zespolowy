@@ -17,11 +17,12 @@ Route::resource('/', ListingController::class);
 
 Route::middleware('auth')->group(function () {
     Route::middleware([SuspendedMiddleware::class])->group(function () {
-        Route::view('/logout', 'auth.logout')->name('logout');
-        Route::post('/logout', [AuthController::class, 'logout']);
-
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
+
+        Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->name('listItem');
+        Route::resource('listings', ListingController::class);
+
 
         // Route::view('/item/', 'listings.details')->name('details');
         Route::get('/item/{id}', [ListingController::class, 'show'])->name('itemDetails');
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::view('/suspended', 'suspended')->name('suspended');
+    Route::view('/logout', 'auth.logout')->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout']);
 
 });
 
@@ -57,8 +60,6 @@ Route::middleware('guest')->group(function () {
 
 
 
-Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->name('listItem');
-Route::resource('listings', ListingController::class);
 
 Route::get('/{perPage?}', [ListingController::class, 'index'])->name('perPage');
 Route::get('/userListings/{id}/{perPage?}', [ListingController::class, 'userListings'])->name('userListings');

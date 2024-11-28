@@ -18,10 +18,9 @@ class SuspendedMiddleware
     {
         $user = Auth::user();
 
-        dd('hello suspended bastard :>');
-
-        if (!$user || !$user->hasRole('Suspended')) {
+        if (!$user || $user->hasRole('Suspended')) {
             return redirect('/suspended');
+
         }
 
         return $next($request);
