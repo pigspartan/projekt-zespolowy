@@ -45,7 +45,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        return $user->id === $listing->user_id;
+        return $user->id === $listing->user_id || $user->hasRole('Admin');
     }
 
     /**

@@ -111,4 +111,22 @@ class ListingController extends Controller
 
         return redirect()->back();
     }
+
+    public function flag($id) {
+
+
+        DB::table('listings')->where('id',$id)->update(['is_flagged' => 1]);
+
+        return redirect()->back();
+
+    }
+
+    public function unflag($id) {
+
+
+        DB::table('listings')->where('id',$id)->update(['is_flagged' => 0]);
+
+        return redirect()->back();
+
+    }
 }

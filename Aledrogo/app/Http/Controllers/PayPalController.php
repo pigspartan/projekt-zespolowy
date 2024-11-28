@@ -11,42 +11,44 @@ class PayPalController extends Controller
 {
     public function createPayment(Request $request)
     {
-        $Id = $request->query('Id');
-        $listing = Listing::find($Id);
-        $userid=$listing->user_id;
+        DB::transaction(function () use ($request) {
+            $Id = $request->query('Id');
+            $listing = Listing::find($Id);
+            $userid = $listing->user_id;
 
-        $user=User::find($userid);
-        $user->cash += round(($listing->price)/2,2);
-        $user->save();
+            $user = User::find($userid);
+            $user->cash += round(($listing->price) / 2, 2);
+            $user->save();
 
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $provider->setAccessToken($provider->getAccessToken());
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $provider->setAccessToken($provider->getAccessToken());
 
-        $response = $provider->createOrder([
-            "intent" => "CAPTURE",
-            "purchase_units" => [
-                [
-                    "amount" => [
-                        "currency_code" => "USD",
-                        "value" => $Id
+            $response = $provider->createOrder([
+                "intent" => "CAPTURE",
+                "purchase_units" => [
+                    [
+                        "amount" => [
+                            "currency_code" => "USD",
+                            "value" => $Id
+                        ]
                     ]
+                ],
+                "application_context" => [
+                    "return_url" => route('paypal.capturePayment')
+
                 ]
-                    ],
-                    "application_context" => [
-        "return_url" => route('paypal.capturePayment')
+            ]);
 
-    ]
-        ]);
-
-        if (isset($response['id']) && $response['status'] == 'CREATED') {
-            foreach ($response['links'] as $link) {
-                if ($link['rel'] === 'approve') {
-                    DB::table('listings')->where('id', '=', $listing->id)->delete();
-                    return redirect()->away($link['href']);
+            if (isset($response['id']) && $response['status'] == 'CREATED') {
+                foreach ($response['links'] as $link) {
+                    if ($link['rel'] === 'approve') {
+                        DB::table('listings')->where('id', '=', $listing->id)->delete();
+                        return redirect()->away($link['href']);
+                    }
                 }
             }
-        }
+        });
 
         return redirect()->route('error');
     }
@@ -72,7 +74,7 @@ class PayPalController extends Controller
         #dd($user);
 
         $amount = $user->cash;
-        $user->cash=0;
+        $user->cash = 0;
         $user->save();
 
         $provider = new PayPalClient;
