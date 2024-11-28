@@ -30,8 +30,9 @@
 
 
 
-
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder2</button>
+                    {{--@auth('adminauth')--}}
+                        <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('admin.dashboard')}}'">Admin dashboard</button>
+                    {{--@endauth('adminauth')--}}
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder3</button>
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder4</button>
                 </div>
