@@ -8,13 +8,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class AdminController extends Controller
 {
     public function index() {
 
 
-        $listings = Listing::where('is_flagged',1)->get();
+        $listings = Listing::whereHas('flaggedByUsers')->withCount('flaggedByUsers as timesFlagged')->with('flaggedByUsers')->get();
 
         $users = User::where('id','!=',Auth::id())->get();
 
@@ -58,9 +59,20 @@ class AdminController extends Controller
 
     public function deleteUser($id){
         DB::transaction(function () use ($id) {
+
+            Gate::authorize('delete',Auth::user());
+
+
             DB::table('users')->delete($id);
         });
 
         return redirect()->back()->with(['message'=> 'Użytkownik usunięty']);
+    }
+
+    public function inspectUser($userId) {
+
+        $user = User::with('flaggedListings')->findOrFail($userId);
+
+        return view('auth.inspectUser', ['user' => $user]);
     }
 }

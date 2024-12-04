@@ -77,4 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     {
         return $this->hasMany(Listing::class);
     }
+
+    public function flaggedListings() {
+        return $this->belongsToMany(Listing::class, 'flagged_listings')
+                ->withPivot('reason')
+                ->withTimestamps();
+    }
 }

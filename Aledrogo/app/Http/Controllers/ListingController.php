@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Listing;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -22,16 +23,27 @@ class ListingController extends Controller
             $perPage = 2;
         }
 
-        $listings = Listing::latest()->paginate($perPage);
+        $listings = Listing::select('listings.*')
+        ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
+        ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
+        ->groupBy('listings.id')
+        ->having('flagged_count', '<', 3)->latest()->paginate($perPage);
 
 
         return view('index',['listings'=>$listings,'perPage'=>$perPage]);
     }
 
     public function userListings($id, $perPage = 5){
-        $listings = Listing::where('user_id',$id)->latest()->paginate($perPage);
+        $listings = Listing::select('listings.*')
+        ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
+        ->where('listings.user_id', $id)
+        ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
+        ->groupBy('listings.id')
+        ->having('flagged_count', '<', 3)->latest()->paginate($perPage);
 
-        return view('userListings',['listings'=>$listings, 'perPage'=>$perPage]);
+        $name = User::findOrFail($id)->name;
+
+        return view('userListings',['listings'=>sizeof($listings) > 0 ? $listings : null, 'userName' => $name,'perPage'=>$perPage]);
     }
 
     /**
@@ -71,9 +83,18 @@ class ListingController extends Controller
     public function show($id)
     {
 
-        $item = Listing::findOrFail($id);
+        $canFlag = true;
+
+        $item = Listing::with('flaggedByUsers')->findOrFail($id);
+
+        $flags = $item->flaggedByUsers();
+
+        if($flags->find(Auth::id()) != null){
+            $canFlag = false;
+        }
+
         //dd($item);
-        return view('listings.details',['item' => $item]);
+        return view('listings.details',['item' => $item, 'canFlag' => $canFlag]);
     }
 
     /**
@@ -98,35 +119,46 @@ class ListingController extends Controller
     public function destroy($id)
     {
 
-        $listing = Listing::findOrFail($id);
+        DB::transaction(function () use ($id) {
 
-        Gate::authorize('delete',$listing);
 
-        $path = DB::table('listings')->where('id',$id)->firstOrFail()->path;
+            $listing = Listing::findOrFail($id);
 
-        Storage::disk('public')->delete($path);
+            Gate::authorize('delete',$listing);
 
-        Listing::destroy($id);
+            $path = DB::table('listings')->where('id',$id)->firstOrFail()->path;
+
+            Storage::disk('public')->delete($path);
+
+            Listing::destroy($id);
+
+        });
 
 
         return redirect()->back();
     }
 
-    public function flag($id) {
+    public function flag(Request $request, $listingId) {
 
 
-        DB::table('listings')->where('id',$id)->update(['is_flagged' => 1]);
+        $listing = Listing::findOrFail($listingId);
 
-        return redirect()->back();
+        $listing->flaggedByUsers()->attach(Auth::id(),[
+            'reason' => $request->reason,
+        ]);
+
+        return redirect()->back()->with('success', 'Ogłoszenie zostało oflagowane');
 
     }
 
-    public function unflag($id) {
+    public function unflag($listingId) {
 
 
-        DB::table('listings')->where('id',$id)->update(['is_flagged' => 0]);
+        $listing = Listing::findOrFail($listingId);
 
-        return redirect()->back();
+        $listing->flaggedByUsers()->detach();
+
+        return redirect()->back()->with('success', 'Flagi ogłoszenia zostały usunięte');
 
     }
 }

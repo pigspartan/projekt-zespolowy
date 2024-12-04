@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
         // Route::view('/item/', 'listings.details')->name('details');
         Route::get('/item/{id}', [ListingController::class, 'show'])->name('itemDetails');
-        Route::get('/item/flag/{id}', [ListingController::class, 'flag'])->name('listing.flag');
+        Route::post('/item/{id}/flag', [ListingController::class, 'flag'])->name('listing.flag');
         Route::get('/item/unflag/{id}', [ListingController::class, 'unflag'])->name('listing.unflag');
 
         Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/user/delete/{id}', [AdminController::class, 'deleteUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.delete');
         Route::get('/admin/user/restore/{id}', [AdminController::class, 'restoreUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.restore');
         Route::get('/admin/user/suspend/{id}', [AdminController::class, 'suspendUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.suspend');
+        Route::get('/admin/user/inspect/{id}', [AdminController::class, 'inspectUser'])->middleware([RoleMiddleware::class . ':Admin'])->name('admin.user.inspect');
     });
 
     Route::view('/suspended', 'suspended')->name('suspended');

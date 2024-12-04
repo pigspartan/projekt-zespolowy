@@ -5,7 +5,8 @@
 
     @endauth
     <div class="ml-60 mr-60 min-w-min">
-        <h1 class="text-center text-3xl p-4 bg-blue-900">List of listed listings by {{$listings[0]->user->name}}</h1>
+        <h1 class="text-center text-3xl p-4 bg-blue-900">List of listed listings by {{$userName}}</h1>
+        @if($listings)
         @foreach ($listings as $key => $item)
         <div class="p-4 flex {{$key % 2 == 0 ? "bg-sky-950" : "bg-blue-900"}}">
             <img class="w-32 h-fit mt-auto mb-auto" src="{{asset('storage/'.$item->path)}}" alt="produkt">
@@ -19,6 +20,7 @@
             </div>
         </div>
         @endforeach
+
 
         <div class="flex justify-center items-center bg-sky-700">
             <div class="flex justify-center items-center space-x-4 mx-auto">
@@ -41,6 +43,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
 
