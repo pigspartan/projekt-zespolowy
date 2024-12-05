@@ -7,6 +7,7 @@ npm install
 php artisan key:generate
 php artisan migrate
 npm run build 
+//jeśli jest ściana czerwonego tekstu to może npm update
 php artisan serve
 
 //Seedowanie ról
@@ -30,7 +31,7 @@ npm run build
 //uruchomić w 1. konsoli
 npm run watch
 //uruchomić drugą konsolę
-//php artisan serve
+php artisan serve
 
 //mail  w.env
 zróbcie konto na mailtrapie i skopiujcie PHP->laravel 9+ do .env
@@ -52,3 +53,11 @@ sb-wgzug33467579@business.example.com
 
 sb-a3jpd33473419@personal.example.com
 GW}$F3?g
+
+
+
+
+
+
+//funy wipe
+php artisan db:wipe    
