@@ -143,6 +143,10 @@ class ListingController extends Controller
 
         $listing = Listing::findOrFail($listingId);
 
+        if(User::find(Auth::id())->flaggedListings()->find($listingId) != null){
+            return redirect()->back()->with('error', 'Już oflagowałeś to ogłoszenie');
+        }
+
         $listing->flaggedByUsers()->attach(Auth::id(),[
             'reason' => $request->reason,
         ]);

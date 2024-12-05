@@ -9,10 +9,8 @@
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button>
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>
-
                     {{-- bool canFlag: true->może flagować; false->nie może flagować; --}}
                     <button class="m-4 p-1 bg-red-500 text-black border-amber-600 border-2 rounded" id="reportButton">Zgłoś ogłoszenie</button>
-
                     {{-- <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button> --}}
                 </div>
                 <div id="flagForm" hidden>
