@@ -19,4 +19,12 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function flaggedByUsers()
+{
+    return $this->belongsToMany(User::class, 'flagged_listings')
+                ->withPivot('reason')
+                ->withTimestamps();
+}
+
 }

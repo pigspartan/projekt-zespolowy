@@ -9,10 +9,50 @@
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button>
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>
-                    <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button>
+
+
+                    {{-- bool canFlag: true->może flagować; false->nie może flagować; --}}
+                    <form action="{{ route('listing.flag', $item->id) }}" method="POST">
+                        @csrf
+                        <label for="reason">Reason for flagging:</label>
+                        <textarea name="reason" id="reason" required></textarea>
+                        <button type="submit" class="btn btn-danger">Flag Listing</button>
+                    </form>
+
+
+
+                    {{-- <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button> --}}
                 </div>
                 <p class="pt-2 text-right text-sm">Ogłoszenie utworzono: {{$item->created_at}}</p>
                 <p class="text-right text-sm">Ostatnia aktualizacja: {{$item->updated_at}}</p>
+
+                @role('Admin')
+
+
+                @if($item->flaggedByUsers->isEmpty())
+        <p>No flags for this listing.</p>
+    @else
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Reason</th>
+                    <th>Flagged At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($item->flaggedByUsers as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->pivot->reason }}</td>
+                        <td>{{ $user->pivot->created_at }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+    @endrole
+
             </div>
         </div>
     </div>
