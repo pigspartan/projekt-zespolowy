@@ -9,6 +9,9 @@ php artisan migrate
 npm run build 
 php artisan serve
 
+//Seedowanie ról
+php artisan db:seed --class=RoleSeeder
+
 //Zdjęcia
 1. backup zdjec
 2. usun folder /public/storage
