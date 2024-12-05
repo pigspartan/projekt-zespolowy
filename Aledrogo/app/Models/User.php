@@ -83,4 +83,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
                 ->withPivot('reason')
                 ->withTimestamps();
     }
+
+
 }

@@ -43,7 +43,6 @@ class PayPalController extends Controller
             if (isset($response['id']) && $response['status'] == 'CREATED') {
                 foreach ($response['links'] as $link) {
                     if ($link['rel'] === 'approve') {
-                        DB::table('listings')->where('id', '=', $listing->id)->delete();
                         return redirect()->away($link['href']);
                     }
                 }
@@ -55,62 +54,72 @@ class PayPalController extends Controller
 
     public function capturePayment(Request $request)
     {
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $provider->setAccessToken($provider->getAccessToken());
+        DB::transaction(function () use ($request) {
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $provider->setAccessToken($provider->getAccessToken());
 
-        $response = $provider->capturePaymentOrder($request->query('token'));
+            $response = $provider->capturePaymentOrder($request->query('token'));
 
-        if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 
-            return redirect()->route('index');
-        }
+
+                return redirect()->route('index');
+            }
+        });
+
 
 
     }
     public function sendPayout(Request $request)
     {
-        $user = User::find(Auth::id());
-        #dd($user);
+        DB::transaction(function () use ($request) {
 
-        $amount = $user->cash;
-        $user->cash = 0;
-        $user->save();
 
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $accessToken = $provider->getAccessToken();
-        $provider->setAccessToken($accessToken);
+            $user = User::find(Auth::id());
+            #dd($user);
 
-        $payoutData = [
-            "sender_batch_header" => [
-                "email_subject" => "You have a payout!",
-            ],
-            "items" => [
-                [
-                    "recipient_type" => "EMAIL",
-                    "amount" => [
-                        "value" => number_format($amount, 2, '.', ''),
-                        "currency" => "USD"
-                    ],
-                    "receiver" => $user->email,
-                    "note" => "Thank you for using our service!",
-                    "sender_item_id" => uniqid()
+            $amount = $user->cash;
+            $user->cash = 0;
+            $user->save();
+
+            $provider = new PayPalClient;
+            $provider->setApiCredentials(config('paypal'));
+            $accessToken = $provider->getAccessToken();
+            $provider->setAccessToken($accessToken);
+
+            $payoutData = [
+                "sender_batch_header" => [
+                    "email_subject" => "You have a payout!",
+                ],
+                "items" => [
+                    [
+                        "recipient_type" => "EMAIL",
+                        "amount" => [
+                            "value" => number_format($amount, 2, '.', ''),
+                            "currency" => "USD"
+                        ],
+                        "receiver" => $user->email,
+                        "note" => "Thank you for using our service!",
+                        "sender_item_id" => uniqid()
+                    ]
                 ]
-            ]
-        ];
+            ];
 
-        $response = $provider->createBatchPayout($payoutData);
+            $response = $provider->createBatchPayout($payoutData);
 
-        if (isset($response['batch_header']['payout_batch_id'])) {
-            return response()->json([
-                'success' => true,
-                'payout_batch_id' => $response['batch_header']['payout_batch_id']
-            ]);
-        } else {
-            return response()->json(['error' => 'Payout failed.', 'details' => $response], 500);
-        }
+            if (isset($response['batch_header']['payout_batch_id'])) {
+                return response()->json([
+                    'success' => true,
+                    'payout_batch_id' => $response['batch_header']['payout_batch_id']
+                ]);
+            } else {
+                return response()->json(['error' => 'Payout failed.', 'details' => $response], 500);
+            }
+
+        });
     }
+
 
 
 
