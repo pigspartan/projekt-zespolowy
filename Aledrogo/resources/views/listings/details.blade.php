@@ -58,7 +58,6 @@
         document.getElementById('reportButton').addEventListener('click', function (){
             document.getElementById('flagForm').removeAttribute('hidden');
         });
-
         document.getElementById('kup').addEventListener('click', function() {
             window.location.href = "{{ route('paypal.createPayment') }}?Id=" + {{$item->id}};
         });
