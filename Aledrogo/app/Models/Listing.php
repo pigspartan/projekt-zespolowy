@@ -21,10 +21,16 @@ class Listing extends Model
     }
 
     public function flaggedByUsers()
-{
-    return $this->belongsToMany(User::class, 'flagged_listings')
-                ->withPivot('reason')
-                ->withTimestamps();
-}
+    {
+        return $this->belongsToMany(User::class, 'flagged_listings')
+            ->withPivot('reason')
+            ->withTimestamps();
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
 
 }
