@@ -7,6 +7,7 @@ npm install
 php artisan key:generate
 php artisan migrate
 npm run build 
+//jeśli jest ściana czerwonego tekstu to może npm update
 php artisan serve
 
 //Seedowanie ról
@@ -30,7 +31,7 @@ npm run build
 //uruchomić w 1. konsoli
 npm run watch
 //uruchomić drugą konsolę
-//php artisan serve
+php artisan serve
 
 //mail  w.env
 zróbcie konto na mailtrapie i skopiujcie PHP->laravel 9+ do .env
@@ -54,7 +55,9 @@ sb-a3jpd33473419@personal.example.com
 GW}$F3?g
 
 
-//paypal do enva
-PAYPAL_CLIENT_ID=AV2Urlz4N18TNeR4pdC7Zh0clae9TiXZ8jdjGNTc29tFY-lI6pofcY3K1wlCIgH-w2mDf46ZyIsLO1qf
-PAYPAL_CLIENT_SECRET=EGrn2wsTLd12ghIGYzf5bjm6RqXStASChkagdGhzJMRUEFftVXXm4dq1ILQTZiUxniMsTxPyqgOUvA5l
-PAYPAL_MODE=sandbox
+
+
+
+
+//funy wipe
+php artisan db:wipe    
