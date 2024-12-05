@@ -7,7 +7,7 @@
         <h1 class="text-center text-3xl p-4 bg-blue-900">List of Your listed listings</h1>
         @foreach ($items as $key => $item)
         <div class="p-4 flex {{$key % 2 == 0 ? "bg-sky-950" : "bg-blue-900"}}">
-                <img class="max-w-32" src="{{asset('storage/'.$item->path)}}" alt="produkt">
+                <img class="w-32 h-fit mt-auto mb-auto" src="{{asset('storage/'.$item->path)}}" alt="produkt">
                 <div class="flex flex-col flex-wrap m-6 min-w-32">
                     <p class="text-xl font-bold">{{$item->title}}</p>
                     <p>Description: {{$item->content}}</p>
@@ -20,7 +20,7 @@
         @endforeach
     </div>
 
-    
+
 
     @guest
 
