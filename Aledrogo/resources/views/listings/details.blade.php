@@ -6,12 +6,12 @@
             <div class="flex flex-col flex-grow mr">
                 <p class="p-4 text-xl">Opis: {{$item->content}}</p>
                 <a href="{{route('userListings',['id' => $item->user->id])}}" class="pl-4">Sprzedający: {{$item->user->name}}</a>
+                <p class="text-2xl m-auto mr-4">Price: <span class="text-amber-300">{{$item->price}}</span> zł</p>
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button>
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>
                     {{-- bool canFlag: true->może flagować; false->nie może flagować; --}}
                     <button class="m-4 p-1 bg-red-500 text-black border-amber-600 border-2 rounded" id="reportButton">Zgłoś ogłoszenie</button>
-                    {{-- <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button> --}}
                 </div>
                 <div id="flagForm" hidden>
                     <form class="pl-4 flex flex-row justify-center items-center" action="{{ route('listing.flag', $item->id) }}" method="POST">
