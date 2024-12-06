@@ -33,4 +33,19 @@
     </form>
     <p>{{ session('succes') }}</p>
     </div>
+
+    <h1>Send a Message</h1>
+    <form action="{{ route('send') }}" method="POST">
+        @csrf
+        <div>
+            <label for="recipient">Recipient:</label>
+            <input type="text" id="recipient" name="recipient_id">
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+
 </x-layout>
