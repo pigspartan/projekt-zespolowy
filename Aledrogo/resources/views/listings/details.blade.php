@@ -11,12 +11,8 @@
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button>
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>
                     {{-- bool canFlag: true->może flagować; false->nie może flagować; --}}
-<<<<<<< HEAD
-                    <button class="m-4 p-1 bg-red-500 text-black border-amber-600 border-2 rounded" id="reportButton">Zgłoś ogłoszenie</button>
-=======
                     <button {{!$canFlag ? 'disabled' : ''}} class="m-4 p-1 {{!$canFlag ? 'bg-gray-400' : 'bg-red-500'}} text-black border-amber-600 border-2 rounded" id="reportButton">{{!$canFlag ? "Zgłosiłeś ogłoszenie" : "Zgłoś ogłoszenie"}}</button>
                     {{-- <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button> --}}
->>>>>>> f50d83e2448f558b319b1c08095317fc793e11cb
                 </div>
                 <div id="flagForm" hidden>
                     <form class="pl-4 flex flex-row justify-center items-center" action="{{ route('listing.flag', $item->id) }}" method="POST">
