@@ -83,6 +83,14 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
                 ->withPivot('reason')
                 ->withTimestamps();
     }
+    public function sentMessages()
+{
+    return $this->hasMany(Message::class, 'sender_id');
+}
 
+public function receivedMessages()
+{
+    return $this->hasMany(Message::class, 'recipient_id');
+}
 
 }

@@ -25,21 +25,29 @@ class ListingController extends Controller
 
         $listings = Listing::select('listings.*')
         ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
+        ->leftJoin('user_role','listings.user_id','=','user_role.user_id')
         ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
+        ->having('user_role.role_id','!=', 3)
         ->groupBy('listings.id')
-        ->having('flagged_count', '<', 3)->latest()->paginate($perPage);
+        ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
+
 
 
         return view('index',['listings'=>$listings,'perPage'=>$perPage]);
     }
 
     public function userListings($id, $perPage = 5){
+
+        if(User::find($id)->hasRole('Suspended')){
+            return redirect()->back();
+        }
+
         $listings = Listing::select('listings.*')
         ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
         ->where('listings.user_id', $id)
         ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
         ->groupBy('listings.id')
-        ->having('flagged_count', '<', 3)->latest()->paginate($perPage);
+        ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
 
         $name = User::findOrFail($id)->name;
 
@@ -91,6 +99,10 @@ class ListingController extends Controller
 
         if($flags->find(Auth::id()) != null){
             $canFlag = false;
+        }
+
+        if($item->user->hasRole('Suspended')){
+            return redirect()->back();
         }
 
         //dd($item);
