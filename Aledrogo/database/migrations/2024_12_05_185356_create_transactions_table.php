@@ -20,7 +20,16 @@ return new class extends Migration
             $table->timestamp('paid_at');
             $table->timestamps();
         });
+        Schema::create('messages', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade');
+            $table->text('message');
+            $table->timestamp('read_at')->nullable();
+            $table->timestamps();
+        });
     }
+
 
     /**
      * Reverse the migrations.
@@ -28,5 +37,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('transactions');
+        Schema::dropIfExists('messages');
     }
 };

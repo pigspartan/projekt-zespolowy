@@ -16,7 +16,10 @@
                 <p>Seller:<a href='{{route('userListings',['id' => $item->user->id])}}'> {{$item->user->name}}</a></p>
             </div>
             <div class="flex ml-auto">
-                <button onclick="location.href='{{route('itemDetails',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-amber-300 hover:bg-amber-500 text-black">BUY</button>
+                <div class="mt-auto mr-2 mb-auto flex">
+                    <p class="text-2xl m-auto mr-4">Price: <span class="text-amber-300">{{$item->price}}</span> zł</p>
+                <button onclick="location.href='{{route('itemDetails',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 bg-amber-300 hover:bg-amber-500 text-black">BUY</button>
+                </div>
             </div>
         </div>
         @endforeach

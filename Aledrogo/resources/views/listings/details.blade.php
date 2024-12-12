@@ -6,6 +6,7 @@
             <div class="flex flex-col flex-grow mr">
                 <p class="p-4 text-xl">Opis: {{$item->content}}</p>
                 <a href="{{route('userListings',['id' => $item->user->id])}}" class="pl-4">Sprzedający: {{$item->user->name}}</a>
+                <p class="text-2xl m-auto mr-4">Price: <span class="text-amber-300">{{$item->price}}</span> zł</p>
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='kup'>Zakup</button>
                     <button class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded">Wyślij wiadomość</button>

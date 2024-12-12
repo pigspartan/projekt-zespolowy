@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
@@ -70,3 +70,5 @@ use App\Http\Controllers\PayPalController;
 Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])->name('paypal.createPayment');
 Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');
 Route::post('/paypal/payout', [PayPalController::class, 'sendPayout'])->name('paypal.payout');
+Route::post('/send', [MessageController::class, 'sendMessage'])->name('send');
+
