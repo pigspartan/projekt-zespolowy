@@ -1,11 +1,12 @@
 <x-layout>
 
 
-    <h1>Zweryfikuj maila bastardzie</h1>
+    <p class="PageTitle">Weryfikacja Maila</p>
 
     <form action="{{route('verification.send')}}" method="post">
         @csrf
-        <button>Send again</button>
+        <button class="DefaultButton flex m-auto">Wyślij ponownie</button>
+            
     </form>
 
 

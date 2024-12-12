@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 body {
-    background-color: rgb(59, 59, 59);
-    color: whitesmoke;
+    @apply flex flex-col bg-gray-900 text-gray-200/75;
     font-family: Bahnschrift, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -14,6 +13,23 @@ a {
 }
 
 input {
-    color: black;
     font-family: Bahnschrift, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+
+.PageTitle {
+    @apply text-center max-w-max mx-auto text-3xl py-4 px-40 my-4 shadow-lg bg-slate-700 rounded-2xl
+}
+
+.ContentBox{
+    @apply items-center border-2 content-center border-black w-6/12 min-w-max m-auto bg-gray-800/50 rounded-2xl
+}
+
+.DefaultButton{
+    @apply rounded-lg text-xl content-center px-6 py-3 bg-slate-700 hover:bg-slate-700/50 hover:border-black hover:text-black
+}
+
+.DefaultInput{
+    @apply rounded pl-2 bg-slate-700 text-gray-300 hover:bg-slate-700/50
 }

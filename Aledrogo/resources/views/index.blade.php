@@ -6,9 +6,9 @@
     @endauth
 
     <div class="ml-60 mr-60 min-w-min">
-        <div class="text-center max-w-max mx-auto text-3xl py-4 px-40 my-4 rounded-xl shadow-lg bg-blue-900">Lista ogłoszeń</div>
+        <div class="PageTitle">Lista ogłoszeń</div>
         @foreach ($listings as $key => $item)
-        <div class="p-4 m-4 rounded-xl shadow-lg flex {{$key % 2 == 0 ? "bg-sky-950" : "bg-blue-900"}}">
+        <div class="p-4 m-3 rounded-xl shadow-lg flex {{$key % 2 == 0 ? "bg-gray-800" : "bg-slate-800"}}">
             <img class="w-32 h-fit mt-auto mb-auto rounded" src="{{asset('storage/'.$item->path)}}" alt="produkt">
             <div class="flex flex-col flex-wrap m-6 min-w-32">
                 <p class="text-xl font-bold">{{$item->title}}</p>
@@ -25,7 +25,7 @@
         </div>
         @endforeach
 
-        <div class="flex justify-center items-center max-w-max ml-auto rounded px-2 mr-4 bg-sky-700">
+        <div class="flex justify-center items-center max-w-max ml-auto rounded px-2 mr-4 bg-slate-700">
             <div class="flex justify-center items-center space-x-4 max-w-max mx-auto">
                 <select class="text-black my-2 ml-2 rounded p-2" onchange="window.location.href=this.value" name="perPage" id="perPage">
                     <option @if ($perPage == 2)
