@@ -20,7 +20,7 @@
     <ul>
         @foreach ($messages as $message)
             <li>
-                <strong>From:</strong> {{ $message->sender->name }}
+                <strong>From:</strong> {{ $message->sender->email }}
                 <br>
                 <strong>Message:</strong> {{ $message->message }}
             </li>
