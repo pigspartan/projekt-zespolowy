@@ -13,7 +13,7 @@ class MessageController extends Controller
     $message = new Message;
     $message->sender_id = auth()->user()->id; //nwm czemu płacze ale przechodzi nolmalnie
     $recid = User::where('email', $request->recipient_mail)->first();
-    #dd($recid);
+    #dd($request);
     $message->recipient_id = $recid->id;
     $message->message = $request->message;
     $message->save();
