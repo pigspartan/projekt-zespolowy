@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
 
         Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->name('listItem');
+       #Route::view('/message', 'message.mess')->middleware(['auth', 'verified'])->name('message');
+        Route::get('/message', [MessageController::class, 'showMessages'])->middleware(['auth', 'verified'])->name('message');
         Route::resource('listings', ListingController::class);
 
 
@@ -71,4 +73,5 @@ Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])
 Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');
 Route::post('/paypal/payout', [PayPalController::class, 'sendPayout'])->name('paypal.payout');
 Route::post('/send', [MessageController::class, 'sendMessage'])->name('send');
-
+#Route::view('/message', 'message.mess')->name('message');
+Route::get('/message', [MessageController::class, 'showMessages'])->name('message');
