@@ -57,7 +57,7 @@
         <form action="{{ route('send') }}" method="POST">
             @csrf
             <div>
-                <input type="hidden" id="recipient" name="recipient_id" value="{{ $item->user->id }}">
+                <input type="hidden" id="recipient" name="recipient_id" value="{{ $item->user->email }}">
             </div>
             <div>
                 <label for="message">Message:</label>
