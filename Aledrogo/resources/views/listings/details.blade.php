@@ -54,10 +54,11 @@
             </table>
         @endif
         @endrole
+        <!--
         <form action="{{ route('send') }}" method="POST">
             @csrf
             <div>
-                <input type="hidden" id="recipient" name="recipient_id" value="{{ $item->user->email }}">
+                <input type="hidden" id="recipient" name="recipient_id" value="{{ $item->user->id }}">
             </div>
             <div>
                 <label for="message">Message:</label>
@@ -65,6 +66,7 @@
             </div>
             <button type="submit">Send</button>
         </form>
+        -->
     </div>
     <script>
         document.getElementById('reportButton').addEventListener('click', function (){
