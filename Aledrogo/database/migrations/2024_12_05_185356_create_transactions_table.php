@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('buyer_id')->constrained('users','id');
             $table->foreignId('seller_id')->constrained('users','id');
             $table->decimal('amount');
-            $table->timestamp('paid_at');
+            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });
         Schema::create('messages', function (Blueprint $table) {

@@ -31,7 +31,7 @@
                     @role('Admin')
                         <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('admin.dashboard')}}'">Admin dashboard</button>
                     @endrole
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">placeholder3</button>
+                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('transactions.userTransactions', ['id' => auth()->id()])}}'">Twoje transakcje</button>
                     <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('message')}}'">message</button>
                 </div>
                 <div class="flex items-end space-x-3 rtl:space-x-reverse">

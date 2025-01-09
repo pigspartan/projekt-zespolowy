@@ -5,10 +5,9 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\SuspendedMiddleware;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('index');
@@ -18,6 +17,7 @@ Route::resource('/', ListingController::class);
 Route::middleware('auth')->group(function () {
     Route::middleware([SuspendedMiddleware::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/transactions/{id}', [TransactionController::class, 'userTransactions'])->name('transactions.userTransactions');
         Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
 
         Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->name('listItem');

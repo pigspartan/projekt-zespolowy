@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Listing;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 use function Pest\Laravel\patch;
 
@@ -19,39 +21,40 @@ class ListingController extends Controller
     public function index($perPage = 5)
     {
         //dd($perPage);
-        if ($perPage != 2 && $perPage != 5 && $perPage != 10 && $perPage != 50){
+        if ($perPage != 2 && $perPage != 5 && $perPage != 10 && $perPage != 50) {
             $perPage = 2;
         }
 
         $listings = Listing::select('listings.*')
-        ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
-        ->leftJoin('user_role','listings.user_id','=','user_role.user_id')
-        ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
-        ->having('user_role.role_id','!=', 3)
-        ->groupBy('listings.id')
-        ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
+            ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
+            ->leftJoin('user_role', 'listings.user_id', '=', 'user_role.user_id')
+            ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
+            ->having('user_role.role_id', '!=', 3)
+            ->groupBy('listings.id')
+            ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
 
 
 
-        return view('index',['listings'=>$listings,'perPage'=>$perPage]);
+        return view('index', ['listings' => $listings, 'perPage' => $perPage]);
     }
 
-    public function userListings($id, $perPage = 5){
+    public function userListings($id, $perPage = 5)
+    {
 
-        if(User::find($id)->hasRole('Suspended')){
+        if (User::find($id)->hasRole('Suspended')) {
             return redirect()->back();
         }
 
         $listings = Listing::select('listings.*')
-        ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
-        ->where('listings.user_id', $id)
-        ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
-        ->groupBy('listings.id')
-        ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
+            ->leftJoin('flagged_listings', 'listings.id', '=', 'flagged_listings.listing_id')
+            ->where('listings.user_id', $id)
+            ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
+            ->groupBy('listings.id')
+            ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
 
         $name = User::findOrFail($id)->name;
 
-        return view('userListings',['listings'=>sizeof($listings) > 0 ? $listings : null, 'userName' => $name,'perPage'=>$perPage]);
+        return view('userListings', ['listings' => sizeof($listings) > 0 ? $listings : null, 'userName' => $name, 'perPage' => $perPage]);
     }
 
     /**
@@ -71,12 +74,12 @@ class ListingController extends Controller
             'title' => ['required', 'max:255'],
             'content' => ['required'],
             'file' => ['required', 'image'],
-            'price'=>['required']
+            'price' => ['required']
         ]);
 
         $path = null;
-        if ($request->hasFile('file')){
-            $path = Storage::disk('public')->put('img',$request->file);
+        if ($request->hasFile('file')) {
+            $path = Storage::disk('public')->put('img', $request->file);
         }
 
         $fields['path'] = $path;
@@ -97,16 +100,16 @@ class ListingController extends Controller
 
         $flags = $item->flaggedByUsers();
 
-        if($flags->find(Auth::id()) != null){
+        if ($flags->find(Auth::id()) != null) {
             $canFlag = false;
         }
 
-        if($item->user->hasRole('Suspended')){
+        if ($item->user->hasRole('Suspended')) {
             return redirect()->back();
         }
 
         //dd($item);
-        return view('listings.details',['item' => $item, 'canFlag' => $canFlag]);
+        return view('listings.details', ['item' => $item, 'canFlag' => $canFlag]);
     }
 
     /**
@@ -136,9 +139,9 @@ class ListingController extends Controller
 
             $listing = Listing::findOrFail($id);
 
-            Gate::authorize('delete',$listing);
+            Gate::authorize('delete', $listing);
 
-            $path = DB::table('listings')->where('id',$id)->firstOrFail()->path;
+            $path = DB::table('listings')->where('id', $id)->firstOrFail()->path;
 
             Storage::disk('public')->delete($path);
 
@@ -150,24 +153,31 @@ class ListingController extends Controller
         return redirect()->back();
     }
 
-    public function flag(Request $request, $listingId) {
+    public function flag(Request $request, $listingId)
+    {
+
+        try {
 
 
-        $listing = Listing::findOrFail($listingId);
+            $listing = Listing::findOrFail($listingId);
 
-        if(User::find(Auth::id())->flaggedListings()->find($listingId) != null){
-            return redirect()->back()->with('error', 'Już oflagowałeś to ogłoszenie');
+            if (User::find(Auth::id())->flaggedListings()->find($listingId) != null) {
+                return redirect()->back()->with('error', 'Już oflagowałeś to ogłoszenie');
+            }
+
+            $listing->flaggedByUsers()->attach(Auth::id(), [
+                'reason' => $request->reason,
+            ]);
+
+            return redirect()->back()->with('success', 'Ogłoszenie zostało oflagowane');
+        } catch (Throwable $e) {
+            return response()->view('errors', status: 400);
         }
-
-        $listing->flaggedByUsers()->attach(Auth::id(),[
-            'reason' => $request->reason,
-        ]);
-
-        return redirect()->back()->with('success', 'Ogłoszenie zostało oflagowane');
 
     }
 
-    public function unflag($listingId) {
+    public function unflag($listingId)
+    {
 
 
         $listing = Listing::findOrFail($listingId);
