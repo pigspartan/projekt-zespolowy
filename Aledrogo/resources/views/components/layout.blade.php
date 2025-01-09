@@ -31,7 +31,7 @@
                     @role('Admin')
                         <button class="m-2 p-1 hover:bg-slate-800 border-r border-l rounded-xl" onclick="location.href='{{route('admin.dashboard')}}'">Admin dashboard</button>
                     @endrole
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('message')}}'">message</button>
+                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('message')}}'">Wiadomości</button>
                 </div>
                 <div class="flex items-end space-x-3 rtl:space-x-reverse">
                     <p class="username text-2xl hover:bg-slate-800 p-1 border-r border-l rounded-lg"><a href="{{route('dashboard')}}">{{auth()->user()->name}}</a></p>
@@ -49,16 +49,14 @@
     <main>
         {{ $slot }}
     </main>
+    <!--
     <footer class="mt-8 bg-red-500">
         <nav class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4" aria-label="Global">
             <h1 class="animate-bounce bg-pink-600">LINK DO CS'A:</h1>
             <h1 class="animate-pulse bg-pink-600">157.165.175.1.65</h1>
-            @guest
-            @endguest
-            @auth
-            @endauth
         </nav>
     </footer>
+    -->
 </body>
 
 </html>

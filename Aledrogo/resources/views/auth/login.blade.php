@@ -11,7 +11,7 @@
                 </div>
                 <div class="text-xl max-w-screen-md flex flex-wrap items-center justify-between p-4">
                     <label for="password">Password</label>
-                    <input class="DefaultInput type="password" name="password">
+                    <input class="DefaultInput" type="password" name="password">
                 </div>
                 @error('failed')
                         <p>{{ $message }}</p>

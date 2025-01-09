@@ -9,7 +9,7 @@
                 <p class="text-2xl m-auto mr-4">Cena: <span class="text-amber-300">{{$item->price}}</span> zł</p>
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded" id='kup'>Zakup</button>
-                    <button class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded">Wyślij wiadomość</button>
+                    <button onclick="location.href='{{route('message')}}'" class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded">Wyślij wiadomość</button>
                     {{-- bool canFlag: true->może flagować; false->nie może flagować; --}}
                     <button {{!$canFlag ? 'disabled' : ''}} class="m-4 p-1 {{!$canFlag ? 'bg-gray-400' : 'bg-red-500'}} text-black border-amber-600 border-2 rounded" id="reportButton">{{!$canFlag ? "Zgłosiłeś ogłoszenie" : "Zgłoś ogłoszenie"}}</button>
                     {{-- <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button> --}}
