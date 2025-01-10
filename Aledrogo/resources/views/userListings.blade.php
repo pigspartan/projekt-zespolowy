@@ -5,7 +5,7 @@
 
     @endauth
     <div class="ml-60 mr-60 min-w-min">
-        <h1 class="text-center text-3xl p-4 bg-blue-900">List of listed listings by {{$userName}}</h1>
+        <div class="PageTitle">List of listed listings by {{$userName}}</div>
         @if($listings)
         @foreach ($listings as $key => $item)
         <div class="p-4 flex {{$key % 2 == 0 ? "bg-sky-950" : "bg-blue-900"}}">
