@@ -15,7 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('listing_id')->constrained()->onDelete('cascade');
-            $table->text('reason')->nullable(); // Reason for flagging
+            $table->enum('reason',[
+                'spam',
+                'nieprzyzwoite',
+                'powielone ogłoszenie',
+                'próba oszutwa',
+                'inne'
+            ])->default('inne');
             $table->timestamps();
         });
 

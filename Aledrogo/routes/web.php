@@ -5,10 +5,9 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\SuspendedMiddleware;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'index')->name('index');
@@ -18,9 +17,12 @@ Route::resource('/', ListingController::class);
 Route::middleware('auth')->group(function () {
     Route::middleware([SuspendedMiddleware::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/transactions/{id}', [TransactionController::class, 'userTransactions'])->name('transactions.userTransactions');
         Route::get('/delete/{id}', [ListingController::class, 'destroy'])->name('delete');
 
         Route::view('/create', 'listings.create')->middleware(['auth', 'verified'])->name('listItem');
+       #Route::view('/message', 'message.mess')->middleware(['auth', 'verified'])->name('message');
+        Route::get('/message', [MessageController::class, 'showMessages'])->middleware(['auth', 'verified'])->name('message');
         Route::resource('listings', ListingController::class);
 
 
@@ -71,4 +73,5 @@ Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])
 Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');
 Route::post('/paypal/payout', [PayPalController::class, 'sendPayout'])->name('paypal.payout');
 Route::post('/send', [MessageController::class, 'sendMessage'])->name('send');
-
+#Route::view('/message', 'message.mess')->name('message');
+Route::get('/message', [MessageController::class, 'showMessages'])->name('message');
