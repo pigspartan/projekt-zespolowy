@@ -1,12 +1,12 @@
 <x-layout>
-    <div class="ml-60 mr-60 bg-slate-800 p-16 pt-2 rounded-xl min-w-min">
-        <h1 class="text-center max-w-max mx-auto text-3xl py-4 px-40 my-4 rounded-xl shadow-lg bg-sky-700">{{$item->title}}</h1>
+    <div class="listingDetails">
+        <h1 class="pageTitle">{{$item->title}}</h1>
         <div class="flex flex-wrap">
-            <img class="max-w-80 h-min rounded" src="{{asset('storage/'.$item->path)}}" alt="produkt">
+            <img class="roundedImg" src="{{asset('storage/'.$item->path)}}" alt="produkt">
             <div class="flex flex-col flex-grow mr">
                 <p class="p-4 text-xl">Opis: {{$item->content}}</p>
                 <a href="{{route('userListings',['id' => $item->user->id])}}" class="pl-4">Sprzedający: {{$item->user->name}}</a>
-                <p class="text-2xl m-auto mr-4">Cena: <span class="text-amber-300">{{$item->price}}</span> zł</p>
+                <p class="text-2xl m-auto mr-4">Cena: <span class="goldText">{{$item->price}}</span> zł</p>
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded" id='kup'>Zakup</button>
                     <button onclick="location.href='{{route('message')}}'" class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded">Wyślij wiadomość</button>
