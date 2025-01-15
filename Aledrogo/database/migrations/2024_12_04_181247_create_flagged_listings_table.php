@@ -19,7 +19,7 @@ return new class extends Migration
                 'spam',
                 'nieprzyzwoite',
                 'powielone ogłoszenie',
-                'próba oszutwa',
+                'próba oszustwa',
                 'inne'
             ])->default('inne');
             $table->timestamps();

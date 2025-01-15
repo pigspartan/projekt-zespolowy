@@ -12,7 +12,8 @@ class Listing extends Model
         'title',
         'content',
         'path',
-        'price'
+        'price',
+        'payment_id'
     ];
 
     public function user(): BelongsTo
@@ -27,9 +28,9 @@ class Listing extends Model
             ->withTimestamps();
     }
 
-    public function transaction()
+    public function transactions()
     {
-        return $this->hasOne(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
 
