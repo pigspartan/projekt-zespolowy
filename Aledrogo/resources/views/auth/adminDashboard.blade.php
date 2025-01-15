@@ -1,14 +1,12 @@
 <x-layout>
     @vite(['resources/js/dogscript.js'])
     @auth
-
-
     @endauth
     <div class="flex flex-row">
         <div class="ml-40 mr-4 basis-1/2">
-            <h1 class="text-center text-3xl p-4 bg-blue-900">Oflagowane ogłoszenia</h1>
+            <h1 class="pageTitle">Oflagowane ogłoszenia</h1>
             @foreach ($listings as $key => $item)
-            <div class="p-4 flex {{$key % 2 == 0 ? "bg-sky-950" : "bg-blue-900"}}">
+            <div class="listing {{$key % 2 == 0 ? "bg-gray-400 dark:bg-gray-800" : "bg-gray-300 dark:bg-slate-800"}}">
                 <img class="w-32 h-fit mt-auto mb-auto" src="{{asset('storage/'.$item->path)}}" alt="produkt">
                 <div class="flex flex-col flex-wrap m-6 min-w-32">
                     <p class="text-xl font-bold">{{$item->title}}</p>
@@ -25,42 +23,33 @@
             @endforeach
         </div>
         <div class="mr-40 ml-4 basis-1/2">
-            <h1 class="text-center text-3xl p-4 bg-blue-900">Użytkownicy</h1>
+            <h1 class="pageTitle">Użytkownicy</h1>
             @foreach ($users as $key => $item)
-            <div class="p-4 flex {{$key % 2 == 0 ? "bg-sky-950" : "bg-blue-900"}}">
-                <div class="flex flex-col flex-wrap m-6 ml-auto mr-auto min-w-32">
+            <div class="listing {{$key % 2 == 0 ? "bg-gray-400 dark:bg-gray-800" : "bg-gray-300 dark:bg-slate-800"}}">
+                <div>
                     <p class="text-xl font-bold">{{$item->name}}</p>
                     <p>Email: {{$item->email}}</p>
                     <div>
-                        Role:
+                        Rola:
                             @foreach($item->roles as $rKey => $role)
                                 {{$role->name}}
                             @endforeach
                     </div>
-                    <div>
-                        {{-- user->hasRole('nazwaRoli') żeby zobaczyć czy ma role;  --}}
-                        <button onclick="location.href='{{route('admin.user.inspect',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-blue-600 hover:bg-blue-700 text-black">DETAILS</button>
-                        <button onclick="location.href='{{route('admin.user.delete',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-orange-600 hover:bg-red-700 text-black">DELETE</button>
-                        @if ($item->hasRole('Suspended'))
-                            <button onclick="location.href='{{route('admin.user.restore',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-green-600 hover:bg-green-700 text-black">RESTORE</button>
-                        @else
-                            <button onclick="location.href='{{route('admin.user.suspend',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 mt-auto mr-2 mb-auto bg-amber-300 hover:bg-amber-500 text-black">SUSPEND</button>
-                        @endif
-
-                    </div>
                 </div>
-                <div class="flex ml-auto">
-
+                <div class="ml-auto my-auto">
+                    {{-- user->hasRole('nazwaRoli') żeby zobaczyć czy ma role;  --}}
+                    <button onclick="location.href='{{route('userListings',['id' => $item->id])}}'" class="border-2 border-black rounded-xl w-20 h-12 mt-auto mr-2 mb-auto bg-blue-500 hover:bg-blue-700 text-black">Szczegóły</button>
+                    <button onclick="location.href='{{route('admin.user.delete',['id' => $item->getKey()])}}'" class="border-2 border-black rounded-xl w-20 h-12 mt-auto mr-2 mb-auto bg-blue-500 hover:bg-blue-700 text-black">Usuń</button>
+                    @if ($item->hasRole('Suspended'))
+                        <button onclick="location.href='{{route('admin.user.restore',['id' => $item->getKey()])}}'" class="border-2 border-black rounded-xl w-20 h-12 mt-auto mr-2 mb-auto bg-blue-500 hover:bg-blue-700 text-black">Odblokuj</button>
+                    @else
+                        <button onclick="location.href='{{route('admin.user.suspend',['id' => $item->getKey()])}}'" class="border-2 border-black rounded-xl w-20 h-12 mt-auto mr-2 mb-auto bg-blue-500 hover:bg-blue-700 text-black">Zablokuj</button>
+                    @endif
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-
-
-
-
     @guest
-
     @endguest
 </x-layout>

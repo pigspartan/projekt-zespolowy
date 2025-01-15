@@ -1,13 +1,7 @@
 <x-layout>
-
-
-    <p class="PageTitle">Weryfikacja Maila</p>
-
+    <p class="pageTitle">Wysłano maila z weryfikacją konta</p>
     <form action="{{route('verification.send')}}" method="post">
         @csrf
-        <button class="DefaultButton flex m-auto">Wyślij ponownie</button>
-            
+        <button class="defaultButton flex m-auto">Wyślij ponownie</button>
     </form>
-
-
 </x-layout>
