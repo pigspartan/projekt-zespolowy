@@ -17,16 +17,16 @@
             @guest
                 <div class="flex items-end space-x-3 rtl:space-x-reverse">
                     <a class="text-xl border-r border-l rounded-lg ml-2 mr-2 p-1  hover:bg-violet-900" href="{{ route('login') }}">Login</a>
-                    <a class="text-xl border-r border-l rounded-lg ml-2 mr-2 p-1  hover:bg-violet-900" href="{{ route('register') }}">Register</a>
+                    <a class="text-xl border-r border-l rounded-lg ml-2 mr-2 p-1  hover:bg-violet-900" href="{{ route('register') }}">Rejestracja</a>
                 </div>
             @endguest
             @auth
                 <div class="flex items-start">
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('index')}}'">Shop</button>
-                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">Sell something</button>
+                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('index')}}'">Ogłoszenia</button>
+                    <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('listItem')}}'">Dodaj ogłoszenie</button>
                     <form action="{{ route('paypal.payout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl">Cashout</button>
+                        <button type="submit" class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl">Wypłata</button>
                     </form>
                     @role('Admin')
                         <button class="m-2 p-1 hover:bg-sky-800 border-r border-l rounded-xl" onclick="location.href='{{route('admin.dashboard')}}'">Admin dashboard</button>
