@@ -68,6 +68,10 @@
         </form>
         -->
     </div>
+
+    @if($errors->any())
+    <h4>{{$errors->first()}}</h4>
+    @endif
     <script>
         document.getElementById('reportButton').addEventListener('click', function (){
             document.getElementById('flagForm').removeAttribute('hidden');

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('path');
+            $table->enum('status', ['available', 'reserved', 'sold'])->default('available');
             $table->timestamps();
             $table->float('price',2);
         });

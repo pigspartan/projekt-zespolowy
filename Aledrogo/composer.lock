@@ -3146,12 +3146,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Srmklive\\PayPal\\Providers\\PayPalServiceProvider"
-                    ],
                     "aliases": {
                         "PayPal": "Srmklive\\PayPal\\Facades\\PayPal"
-                    }
+                    },
+                    "providers": [
+                        "Srmklive\\PayPal\\Providers\\PayPalServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -8761,12 +8761,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
