@@ -38,7 +38,7 @@
         @enderror
         <button class="DefaultButton flex" style="padding:5px 15px 5px 15px;margin:auto; margin-bottom:20px">Add</button>
     </form>
-    <p>{{ session('succes') }}</p>
+    <p>{{ session('success') }}</p>
     </div>
 
 </x-layout>

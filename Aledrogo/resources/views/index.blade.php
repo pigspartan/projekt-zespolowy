@@ -5,6 +5,13 @@
 
     @endauth
 
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+
     <div class="ml-60 mr-60 min-w-min">
         <div class="PageTitle">Lista ogłoszeń</div>
         @foreach ($listings as $key => $item)
