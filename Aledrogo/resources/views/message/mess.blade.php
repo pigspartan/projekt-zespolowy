@@ -1,31 +1,33 @@
 
 <x-layout>
-<html>
 
-<body>
-    <h1>Send a Message</h1>
+<div class="ml-60 mr-60 min-w-min">
+    <div class="PageTitle">Wyślij wiadomość</div>
+    <div class="ContentBox p-8">
     <form action="{{ route('send') }}" method="POST">
         @csrf
-        <div>
-            <label for="recipient">Recipient:</label>
-            <input type="text" id="recipient" name="recipient_mail">
+        <div class="flex my-2">
+            <label class="mr-2" for="recipient">Odbiorca:</label>
+            <input class="text-black rounded basis-full" type="text" id="recipient" name="recipient_mail">
         </div>
-        <div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message"></textarea>
+        <div class="flex">
+            <label class="mr-2" for="message">Treść:</label>
+            <textarea class="text-black rounded basis-full" id="message" name="message"></textarea>
         </div>
-        <button type="submit">Send</button>
+        <div class="flex justify-center items-center mt-2"><button type="submit">Wyślij</button></div>
     </form>
-
+    </div>
+    <div class="PageTitle">Lista Wiadomości</div>
     <ul>
         @foreach ($messages as $message)
+            <div class="ContentBox p-8">
             <li>
                 <strong>From:</strong> {{ $message->sender->email }}
                 <br>
                 <strong>Message:</strong> {{ $message->message }}
             </li>
+            </div>
         @endforeach
     </ul>
-</body>
-</html>
+</div>
 </x-layout>
