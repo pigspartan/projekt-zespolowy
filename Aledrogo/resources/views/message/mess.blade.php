@@ -45,7 +45,7 @@
             <!-- Wiadomości -->
             <div class="w-3/4 bg-gray-300 dark:bg-gray-800 p-4 flex flex-col border-y border-r rounded-r-xl">
                 <div class="flex-1 overflow-y-auto max-h-[calc(100vh-8rem)]">
-                    <div class="space-y-4">
+                    <div class="space-y-4 p-3">
                         <!-- Przykładowa wiadomość -->
                         {{-- <div class="bg-blue-400 dark:bg-gray-700/50 p-3 rounded-lg w-7/12 max-w-fit">
                             <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum eros sed est consectetur, a lacinia neque iaculis. Etiam at suscipit ligula. Praesent consectetur ornare odio ut finibus. Praesent auctor tempor convallis. Phasellus eu leo neque. Donec at turpis vitae sem ullamcorper placerat. Quisque condimentum, metus nec rutrum luctus, neque elit laoreet est, ac ornare nibh quam at augue. Integer molestie eleifend tortor id imperdiet. Duis pulvinar ligula eu pulvinar elementum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum eros sed est consectetur, a lacinia neque iaculis. Etiam at suscipit ligula. Praesent consectetur ornare odio ut finibus. Praesent auctor tempor convallis. Phasellus eu leo neque. Donec at turpis vitae sem ullamcorper placerat. Quisque condimentum, metus nec rutrum luctus, neque elit laoreet est, ac ornare nibh quam at augue. Integer molestie eleifend tortor id imperdiet. Duis pulvinar ligula eu pulvinar elementum.</p>
