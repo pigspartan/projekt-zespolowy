@@ -155,8 +155,6 @@ class PayPalController extends Controller
             $user = User::find(Auth::id());
 
             $amount = $user->cash;
-            $user->cash = 0;
-            $user->save();
 
             $provider = new PayPalClient;
             $provider->setApiCredentials(config('paypal'));
@@ -188,6 +186,8 @@ class PayPalController extends Controller
                     'success' => true,
                     'payout_batch_id' => $response['batch_header']['payout_batch_id']
                 ]);
+                $user->cash = 0;
+                $user->save();
             } else {
                 return response()->json(['error' => 'Payout failed.', 'details' => $response], 500);
             }
