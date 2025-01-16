@@ -78,3 +78,4 @@ Route::post('/paypal/payout', [PayPalController::class, 'sendPayout'])->name('pa
 Route::post('/send', [MessageController::class, 'sendMessage'])->name('send');
 #Route::view('/message', 'message.mess')->name('message');
 Route::get('/message', [MessageController::class, 'showMessages'])->name('message');
+
