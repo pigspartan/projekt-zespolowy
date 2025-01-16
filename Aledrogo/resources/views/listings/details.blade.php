@@ -54,10 +54,14 @@
             </table>
         @endif
         @endrole
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         <form action="{{ route('send') }}" method="POST">
             @csrf
             <div>
-                <input type="hidden" id="recipient" name="recipient_mail" value="{{$item->user->email}}">
+                <input type="hidden" id="rec_id" name="rec_id" value="{{$item->user->id}}">
             </div>
             <div>
                 <label for="message">Message:</label>
