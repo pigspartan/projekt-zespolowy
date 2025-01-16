@@ -1,55 +1,43 @@
 <x-layout>
-    <div class="PageTitle">Add a new listing</div>
-    <div class="ContentBox">
-        
+    <div class="pageTitle">Dodaj ogłoszenie</div>
+    <div class="contentBox">
     <form action="{{ route('listings.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="m-8 flex">
-            <label for="title" class="mr-2">Title&nbsp;</label><br>
-            <input class="DefaultInput" type="text" name="title" value="{{ old('title') }}">
+        <div class="m-8 flex place-content-between">
+            <div class="basis-full flex">
+                <label for="title" class="defaultLabel">Nazwa&nbsp;</label><br>
+                <input class="defaultInput mr-12" type="text" name="title" value="{{ old('title') }}">
+            </div>
+            <div class="flex">
+                <label for="content" class="defaultLabel">Cena</label><br>
+                <input class="defaultInput" type="number" step="0.01" name="price" value="{{ old('title') }}">
+            </div>
         </div>
         @error('title')
-            <p class="ml-8 text-red-500">{{ $message }}</p>
+            <p class="warning">{{ $message }}</p>
+        @enderror
+        @error('content')
+            <p class="warning">{{ $message }}</p>
         @enderror
         <div class="m-8 flex">
-            <label for="content" class="mr-2">Price</label><br>
-            <input class="DefaultInput" type="number" step="0.01" name="price" value="{{ old('title') }}">
-        </div>
-        
-        @error('content')
-            <p class="ml-8 text-red-500">{{ $message }}</p>
-        @enderror
-        <div class="m-8 flex">
-            <label for="content" class="mr-2">Description</label><br>
-            <textarea class="DefaultInput" rows="5" name="content">{{ old('content') }}</textarea>
+            <label for="content" class="defaultLabel">Opis</label><br>
+            <textarea class="defaultInput ml-8" rows="5" name="content">{{ old('content') }}</textarea>
         </div>
         @error('content')
-            <p class="ml-8 text-red-500">{{ $message }}</p>
+            <p class="warning">{{ $message }}</p>
         @enderror
         <div class="m-8">
-            <label class="mr-2" for="file">Photo</label>
-            <input type="file" name="file" class="text-white">
+            <label class="defaultLabel" for="file">Zdjęcie</label>
+            <input type="file" name="file" class="dark:text-white">
         </div>
         @error('file')
-        <p class="ml-8 text-red-500">{{ $message }}</p>
+        <p class="warning">{{ $message }}</p>
         @enderror
-        <button class="DefaultButton flex" style="padding:5px 15px 5px 15px;margin:auto; margin-bottom:20px">Add</button>
+        <div class="centerDiv pb-4">
+            <button class="defaultButton">Dodaj</button>
+        </div>
     </form>
-    <p>{{ session('succes') }}</p>
+    <p>{{ session('success') }}</p>
     </div>
-
-    <h1>Send a Message</h1>
-    <form action="{{ route('send') }}" method="POST">
-        @csrf
-        <div>
-            <label for="recipient">Recipient:</label>
-            <input type="text" id="recipient" name="recipient_id">
-        </div>
-        <div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message"></textarea>
-        </div>
-        <button type="submit">Send</button>
-    </form>
 
 </x-layout>

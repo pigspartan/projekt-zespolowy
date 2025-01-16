@@ -1,33 +1,30 @@
 <x-layout>
-
-    <p class="PageTitle">Login</p>
-    <div class="ContentBox">
-        <div class=" p-8 w-max m-auto">
-            <form action="{{ route('login') }}" method="POST">
+    <p class="pageTitle">Zaloguj się</p>
+    <div class="contentBox pb-4">
+            <form class="defaultForm" action="{{ route('login') }}" method="POST">
                 @csrf
-                <div class="text-xl max-w-screen-md flex flex-wrap items-center justify-between p-4">
-                    <label class="m-8" for="email">Email</label>
-                    <input class="DefaultInput" type="email" name="email">
+                <div class="formElement">
+                    <label class="defaultLabel" for="email">Email</label>
+                    <input class="defaultInput" type="email" name="email">
                 </div>
-                <div class="text-xl max-w-screen-md flex flex-wrap items-center justify-between p-4">
-                    <label for="password">Password</label>
-                    <input class="DefaultInput type="password" name="password">
+                <div class="formElement">
+                    <label class="defaultLabel" for="password">Hasło</label>
+                    <input class="defaultInput" type="password" name="password">
                 </div>
                 @error('failed')
                         <p>{{ $message }}</p>
                 @enderror
                 <div class="p-4">
                     <input type="checkbox" name="remember" id="remember">
-                    <label for="remember"> Remember me </label>
+                    <label for="remember">Zapamiętaj logowanie</label>
                 </div>
-                <div class="max-w-screen-md flex flex-col flex-wrap items-center justify-between mx-auto p-4">
-                    <button class="DefaultButton">Login</button>
+                <div class="centerDiv">
+                    <button class="defaultButton">Login</button>
                 </div>
             </form>
-            <div class="max-w-screen-md flex flex-col flex-wrap items-center justify-between mx-auto p-2">
-                <form action="{{route('password.request')}}"><button class="text-sm content-center p-0.5 hover:italic text-orange-400">i forgor hasła 💀</button></form>
+            <div class="centerDiv">
+                <form action="{{route('password.request')}}"><button class="text-sm content-center p-0.5 text-orange-500 dark:text-orange-400">Przypomnij hasło</button></form>
             </div>
         </div>
-    </div>
 </x-layout>
 

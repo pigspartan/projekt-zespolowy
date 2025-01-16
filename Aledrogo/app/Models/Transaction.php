@@ -9,6 +9,14 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'listing_id',
+        'buyer_id',
+        'seller_id',
+        'amount',
+        'paid_at'
+    ];
+
 
     public function listing()
     {
