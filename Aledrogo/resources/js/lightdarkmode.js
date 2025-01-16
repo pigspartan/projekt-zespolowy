@@ -4,10 +4,12 @@ const toggleDarkMode = () => {
     const toggleButton = document.getElementById("toggleMode");
     if (htmlElement.classList.contains('dark')) {
         htmlElement.classList.remove('dark');
+        document.cookie="theme=light"
         localStorage.setItem('theme', 'light');
         toggleButton.innerHTML = "Tryb ciemny";
     } else {
         htmlElement.classList.add('dark');
+        document.cookie="theme=dark"
         localStorage.setItem('theme', 'dark');
         toggleButton.innerHTML = "Tryb jasny";
     }
@@ -17,11 +19,10 @@ const toggleDarkMode = () => {
 const savedTheme = localStorage.getItem('theme');
 const toggleButton = document.getElementById("toggleMode");
 toggleButton.addEventListener("click", () => toggleDarkMode());
+
 if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark');
     toggleButton.innerHTML = "Tryb jasny";
 } else {
-    document.documentElement.classList.remove('dark');
     toggleButton.innerHTML = "Tryb ciemny";
 }
 
