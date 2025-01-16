@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply flex flex-col bg-gray-900 text-gray-200/75;
+    @apply flex flex-col bg-gray-100 text-black dark:bg-slate-900 dark:text-gray-200/75;
     font-family: Bahnschrift, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -16,20 +16,74 @@ input {
     font-family: Bahnschrift, Georgia, Times, 'Times New Roman', serif;
 }
 
-
-
-.PageTitle {
-    @apply text-center max-w-max mx-auto text-3xl py-4 px-40 my-4 shadow-lg bg-slate-700 rounded-2xl
+header {
+    @apply bg-blue-600 dark:bg-slate-950
 }
 
-.ContentBox{
-    @apply items-center border-2 content-center border-black w-6/12 min-w-max m-auto bg-gray-800/50 rounded-2xl
+nav {
+    @apply max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4
+}
+.baseButton {
+    @apply bg-gray-200 shadow-lg dark:bg-transparent p-1 rounded-lg border mx-2
+}
+.authButton {
+    @apply baseButton text-xl hover:bg-blue-500 dark:hover:bg-violet-900
+}
+.navButton {
+    @apply baseButton hover:bg-blue-500 dark:hover:bg-sky-800
+}
+.bigButton {
+    @apply baseButton text-2xl hover:bg-blue-500 dark:hover:bg-violet-900
+}
+.smallButton {
+    @apply baseButton text-xs hover:bg-blue-500 dark:hover:bg-violet-900
+}
+.pageTitle {
+    @apply text-center max-w-max mx-auto text-3xl py-4 px-40 my-4 shadow-xl bg-blue-400 dark:bg-slate-700 rounded-2xl
+}
+.listing {
+    @apply p-4 m-3 rounded-xl shadow-lg flex
+}
+.warning {
+    @apply ml-8 text-red-500
+}
+.pageContent {
+    @apply mx-60 min-w-min
+}
+.goldText {
+    @apply text-black dark:text-amber-300
+}
+.pagination {
+    @apply flex justify-center items-center max-w-max ml-auto rounded px-2 mr-4 bg-gray-300 dark:bg-slate-700
+}
+.paginationSelect {
+    @apply text-black my-2 ml-2 rounded p-2
+}
+.listingDetails {
+    @apply pageContent mt-8 bg-gray-300 dark:bg-slate-800 p-16 pt-2 rounded-xl
+}
+.roundedImg {
+    @apply max-w-80 h-min rounded-lg shadow
+}
+.contentBox{
+    @apply shadow-lg items-center border-2 content-center border-black w-6/12 min-w-max m-auto bg-gray-200 dark:bg-gray-800/50 rounded-2xl
 }
 
-.DefaultButton{
-    @apply rounded-lg text-xl content-center px-6 py-3 bg-slate-700 hover:bg-slate-700/50 hover:border-black hover:text-black
+.defaultButton{
+    @apply rounded-lg text-xl content-center px-6 py-3 bg-blue-300 hover:bg-blue-400 dark:bg-slate-700 dark:hover:bg-slate-700/50 hover:border-black hover:text-black
 }
-
-.DefaultInput{
-    @apply rounded pl-2 bg-slate-700 text-gray-300 hover:bg-slate-700/50
+.centerDiv{
+    @apply flex justify-center items-center
+}
+.defaultForm {
+    @apply p-8 w-max m-auto
+}
+.defaultLabel {
+    @apply mr-2 text-2xl
+}
+.defaultInput{
+    @apply border-black border rounded pl-2 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-700/50 basis-full
+}
+.formElement {
+    @apply text-xl max-w-screen-md flex flex-wrap items-center justify-between p-4
 }
