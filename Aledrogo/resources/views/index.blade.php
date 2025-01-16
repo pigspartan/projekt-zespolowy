@@ -2,6 +2,13 @@
     @vite(['resources/js/dogscript.js'])
     @auth
     @endauth
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
     <div class="pageContent">
         <div class="pageTitle">Lista ogłoszeń</div>
         @foreach ($listings as $key => $item)
