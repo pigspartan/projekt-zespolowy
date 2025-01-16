@@ -55,26 +55,26 @@ public function showMessages()
 
 
 public function chosenchat(Request $request){
-    //dd(Message::where('recipient_id',auth()->user()->id)->Where('sender_id', $request->sender)->get());
-    $msg=Message::where('recipient_id',$request->sender)->Where('sender_id',auth()->user()->id)->get();
-    $msg1=Message::where('sender_id',$request->sender)->Where('recipient_id',auth()->user()->id)->get();
-    $msg=$msg->merge($msg1);
-    $cid=$request->sender;
-    $temp = auth()->user()->receivedMessages()->get();
-    $temp2= auth()->user()->sentMessages()->get();
-    $usersid = array();
-    foreach($temp as $value){
-        array_push($usersid,$value->sender_id);
-    }
-    foreach($temp2 as $value){
-        array_push($usersid,$value->recipient_id);
-    }
-    $usersid=array_unique($usersid);
-    $usersout = array();
-    foreach($usersid as $value){
-        array_push($usersout,  User::find($value));
-    }
-    //dd($msg);
-    return view('message.mess', ['usersout' => $usersout, 'msg' => $msg,'cid'=>$cid]);
-    }
-    }
+//dd(Message::where('recipient_id',auth()->user()->id)->Where('sender_id', $request->sender)->get());
+$msg=Message::where('recipient_id',$request->sender)->Where('sender_id',auth()->user()->id)->latest->get();
+$msg1=Message::where('sender_id',$request->sender)->Where('recipient_id',auth()->user()->id)->latest->get();
+$msg=$msg->merge($msg1);
+$cid=$request->sender;
+$temp = auth()->user()->receivedMessages()->get();
+$temp2= auth()->user()->sentMessages()->get();
+$usersid = array();
+foreach($temp as $value){
+    array_push($usersid,$value->sender_id);
+}
+foreach($temp2 as $value){
+    array_push($usersid,$value->recipient_id);
+}
+$usersid=array_unique($usersid);
+$usersout = array();
+foreach($usersid as $value){
+    array_push($usersout,  User::find($value));
+}
+//dd($msg);
+return view('message.mess', ['usersout' => $usersout, 'msg' => $msg,'cid'=>$cid]);
+}
+}
