@@ -33,6 +33,9 @@ npm run watch
 //uruchomić drugą konsolę
 php artisan serve
 
+//widoki paginacji
+php artisan vendor:publish --tag=laravel-pagination
+
 //mail  w.env
 zróbcie konto na mailtrapie i skopiujcie PHP->laravel 9+ do .env
 
