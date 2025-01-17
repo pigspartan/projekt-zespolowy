@@ -25,6 +25,14 @@ npm run build
 // Zmiana statusu zamówienia i transakcji po 5 minutach oczekiwania
 php artisan queue:work
 
+// instalacja broadcastowanya
+php artisan install:broadcasting
+  - instaluj reverb
+  - instaluj zależności
+  
+uruchom php artisan reverb:start --port=8001 (wybierz port albo wcale nie dawaj jak działa bez)
+
+
 
 //idk, żeby tailwind działał
 //skrypt w package.json

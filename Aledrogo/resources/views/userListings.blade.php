@@ -26,6 +26,7 @@
                 <select class="paginationSelect" onchange="window.location.href=this.value" name="perPage" id="perPage">
                     <option @if ($perPage == 2)
                                 selected="selected"
+<<<<<<< HEAD
                             @endif value="{{route('perPage',['perPage' => 2])}}">2</option>
                     <option @if ($perPage == 5)
                                 selected="selected"
@@ -36,6 +37,18 @@
                     <option @if ($perPage == 50)
                                 selected="selected"
                             @endif value="{{route('perPage',['perPage' => 50])}}">50</option>
+=======
+                            @endif value="{{route('userListings',['id' => $id,'perPage' => 2])}}">2</option>
+                    <option @if ($perPage == 5)
+                                selected="selected"
+                            @endif value="{{route('userListings',['id' => $id,'perPage' => 5])}}">5</option>
+                    <option @if ($perPage == 10)
+                                selected="selected"
+                            @endif value="{{route('userListings',['id' => $id,'perPage' => 10])}}">10</option>
+                    <option @if ($perPage == 50)
+                                selected="selected"
+                            @endif value="{{route('userListings',['id' => $id,'perPage' => 50])}}">50</option>
+>>>>>>> dac39aab11c3bf0fa0d59e121e02749363a9492f
                 </select>
                 <div id="strony" class="flex m-2">
                     <div class="my-auto mr-4">elementów na stronie</div>

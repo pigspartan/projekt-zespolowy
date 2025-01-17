@@ -18,7 +18,14 @@
                     <form class="pl-4 flex flex-row justify-center items-center" action="{{ route('listing.flag', $item->id) }}" method="POST">
                         @csrf
                         <label for="reason">Powód zgłoszenia: </label>
-                        <textarea class="defaultInput dark:hover:bg-gray-600/50 m-2 text-black" name="message" id="message" required></textarea>
+                        {{-- <textarea class="m-2 text-black rounded" name="reason" id="reason" required></textarea> --}}
+                        <select class="m-2 text-black rounded" name="reason" id="reason" required>
+                            <option value="spam">Spam</option>
+                            <option value="nieprzyzwoite">Nieprzyzwoite treści</option>
+                            <option value="powielone ogłoszenie">Powielone ogłoszenie</option>
+                            <option value="próba oszustwa">Próba oszustwa</option>
+                            <option value="inne">Inny</option>
+                        </select>
                         <button class="m-4 p-1 bg-red-500 text-black border-amber-600 border-2 rounded" type="submit">Potwierdź zgłoszenie</button>
                     </form>
                 </div>

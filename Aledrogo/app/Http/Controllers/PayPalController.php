@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PurchaseMade;
 use App\Jobs\ChangeListingStatusJob;
 use App\Models\Listing;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Notifications\SoldNotification;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class PayPalController extends Controller
 {
@@ -57,7 +61,7 @@ class PayPalController extends Controller
                 ]
             ],
             "application_context" => [
-                "return_url" => route('paypal.capturePayment', ['listing_id' => $Id, 'transaction_id' => $transaction->id]),
+                "return_url" => route('paypal.capturePayment', ['listing_id' => $Id, 'transaction_id' => $transaction->id, 'seller_id' => $userid]),
                 "cancel_url" => route('paypal.cancelPayment', ['listing_id' => $Id, 'transaction_id' => $transaction->id]), // Redirect if payment is canceled
             ]
         ]);
@@ -82,6 +86,16 @@ class PayPalController extends Controller
 
         $listingId = $request->query('listing_id');
         $transactionId = $request->query('transaction_id');
+        $sellerId = $request->query('seller_id');
+
+        try{
+            $seller = User::findOrFail($sellerId)->first();
+            $listing = Listing::findOrFail($listingId);
+        } catch(Throwable $e) {
+            return redirect()->route('error');
+        }
+
+
 
         DB::table('listings')->where('id', $listingId)->update(['status' => 'sold']);
         DB::table('transactions')->where('id', $transactionId)->update(['paid_at' => date('d M Y H:i:s')]);
@@ -91,7 +105,8 @@ class PayPalController extends Controller
 
         $response = $provider->capturePaymentOrder($request->query('token'));
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-
+            $seller->notify(new SoldNotification($listing->title));
+            broadcast(new PurchaseMade(  $seller, 'Someone bought Your item: '.$listing->title));
             DB::table('transactions')->where('id', $transactionId)->update(['status' => $response['status']]);
             return redirect()->route('index');
         }
