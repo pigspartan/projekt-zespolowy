@@ -13,7 +13,7 @@
 <body>
     <header>
         <nav aria-label="Global">
-            <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse ml-8">
                 <img src="{{ URL::asset('/img/glorp.jpg') }}" alt="glorp logo" class="h-12" />
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">GlorpCorp©™</span>
             </a>
@@ -41,7 +41,7 @@
                         transakcje</button>
                     <button class="navButton" onclick="location.href='{{ route('message') }}'">Wiadomości</button>
                 </div>
-                <div class="flex items-end space-x-3 rtl:space-x-reverse">
+                <div class="flex items-end space-x-3 rtl:space-x-reverse mr-8">
                     <button id="toggleMode"></button>
                     <p class="bigButton"><a href="{{ route('dashboard') }}">{{ auth()->user()->name }}</a></p>
                     <form action="{{ route('logout') }}" method="post">

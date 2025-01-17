@@ -21,7 +21,7 @@ header {
 }
 
 nav {
-    @apply max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4
+    @apply flex flex-nowrap items-center justify-between mx-auto p-4
 }
 .baseButton {
     @apply bg-gray-200 shadow-lg dark:bg-transparent p-1 rounded-lg border mx-2
