@@ -17,7 +17,7 @@
                     <ul class="space-y-2">
                         @foreach ($usersout as $user)
                             <li
-                                class="transition p-2 bg-gray-200 dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-gray-700 rounded cursor-pointer"
+                                class="transition p-2 {{$user->id != $cid ? 'bg-gray-200 dark:bg-gray-800' :  'bg-gray-400 dark:bg-gray-600'}} bg-gray-200 dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-gray-700 rounded cursor-pointer"
                                 onclick="submitForm('{{ $user->id }}')"
                             >
                                 {{ $user->name }}
@@ -28,13 +28,13 @@
                     <!-- Formularz ukryty -->
                     <form id="userForm" action="{{ route('chose') }}" method="POST" class="hidden">
                         @csrf
-                        <input type="hidden" id="sender" name="sender" value="">
+                        <input type="hidden" id="rec_id" name="rec_id" value="">
                     </form>
 
                     <script>
                         function submitForm(userId) {
                             // Ustaw wartość pola ukrytego
-                            document.getElementById('sender').value = userId;
+                            document.getElementById('rec_id').value = userId;
                             // Wyślij formularz
                             document.getElementById('userForm').submit();
                         }

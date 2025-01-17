@@ -67,7 +67,7 @@ sb-a3jpd33473419@personal.example.com
 GW}$F3?g
 
 
-
+nr grupy i nr zespołu nazwa pliku do wysłania
 
 
 
