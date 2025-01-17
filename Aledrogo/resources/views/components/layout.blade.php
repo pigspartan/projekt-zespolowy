@@ -67,14 +67,9 @@
         </nav>
     </footer> --}}
 </body>
-
 </html>
 
 <script>
-    window.User = {
-        id: {{ auth()->user()->id }}
-    }
-
     window.onload = (event) => {
         window.Echo.private('users.' + {{auth()->id()}}).listen('PurchaseMade', (event) => {
             console.log(event);

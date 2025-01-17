@@ -84,7 +84,7 @@
     </div>
 
     @if($errors->any())
-    <h4>{{$errors->first()}}</h4>
+    <div class="centerDiv mt-4"><h4>{{$errors->first()}}</h4></div>
     @endif
     <script>
         document.getElementById('reportButton').addEventListener('click', function (){
