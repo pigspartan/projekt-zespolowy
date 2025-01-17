@@ -17,26 +17,26 @@ input {
 }
 
 header {
-    @apply bg-blue-400 dark:bg-slate-950
+    @apply bg-blue-600 dark:bg-slate-950
 }
 
 nav {
-    @apply flex flex-nowrap items-center justify-between mx-auto p-4
+    @apply max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4
 }
 .baseButton {
     @apply bg-gray-200 shadow-lg dark:bg-transparent p-1 rounded-lg border mx-2
 }
 .authButton {
-    @apply baseButton text-xl hover:bg-blue-500 dark:hover:bg-violet-900 transition
+    @apply baseButton text-xl hover:bg-blue-500 dark:hover:bg-violet-900
 }
 .navButton {
-    @apply baseButton hover:bg-blue-500 dark:hover:bg-sky-800 transition
+    @apply baseButton hover:bg-blue-500 dark:hover:bg-sky-800
 }
 .bigButton {
-    @apply baseButton text-2xl hover:bg-blue-500 dark:hover:bg-violet-900 transition
+    @apply baseButton text-2xl hover:bg-blue-500 dark:hover:bg-violet-900
 }
 .smallButton {
-    @apply baseButton text-xs hover:bg-blue-500 dark:hover:bg-violet-900 transition
+    @apply baseButton text-xs hover:bg-blue-500 dark:hover:bg-violet-900
 }
 .pageTitle {
     @apply text-center max-w-max mx-auto text-3xl py-4 px-40 my-4 shadow-xl bg-blue-400 dark:bg-slate-700 rounded-2xl
@@ -70,7 +70,7 @@ nav {
 }
 
 .defaultButton{
-    @apply rounded-lg text-xl content-center px-6 py-3 bg-blue-300 hover:bg-blue-400 dark:bg-slate-700 dark:hover:bg-slate-700/50 hover:border-black hover:text-black transition
+    @apply rounded-lg text-xl content-center px-6 py-3 bg-blue-300 hover:bg-blue-400 dark:bg-slate-700 dark:hover:bg-slate-700/50 hover:border-black hover:text-black
 }
 .centerDiv{
     @apply flex justify-center items-center
@@ -82,7 +82,7 @@ nav {
     @apply mr-2 text-2xl
 }
 .defaultInput{
-    @apply hover:bg-slate-200/50 border-black border rounded pl-2 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-700/50 basis-full transition
+    @apply border-black border rounded pl-2 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-700/50 basis-full
 }
 .formElement {
     @apply text-xl max-w-screen-md flex flex-wrap items-center justify-between p-4

@@ -16,7 +16,7 @@
             <div class="flex ml-auto">
                 <div class="mt-auto mr-2 mb-auto flex">
                     <p class="text-2xl m-auto mr-4">Price: <span class="goldText">{{$item->price}}</span> zł</p>
-                <button onclick="location.href='{{route('itemDetails',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 bg-amber-300 hover:bg-amber-500 text-black transition">Kup</button>
+                <button onclick="location.href='{{route('itemDetails',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl w-20 h-12 bg-amber-300 hover:bg-amber-500 text-black">Kup</button>
                 </div>
             </div>
         </div>
@@ -26,16 +26,16 @@
                 <select class="paginationSelect" onchange="window.location.href=this.value" name="perPage" id="perPage">
                     <option @if ($perPage == 2)
                                 selected="selected"
-                            @endif value="{{route('userListings',['id' => $id,'perPage' => 2])}}">2</option>
+                            @endif value="{{route('perPage',['perPage' => 2])}}">2</option>
                     <option @if ($perPage == 5)
                                 selected="selected"
-                            @endif value="{{route('userListings',['id' => $id,'perPage' => 5])}}">5</option>
+                            @endif value="{{route('perPage',['perPage' => 5])}}">5</option>
                     <option @if ($perPage == 10)
                                 selected="selected"
-                            @endif value="{{route('userListings',['id' => $id,'perPage' => 10])}}">10</option>
+                            @endif value="{{route('perPage',['perPage' => 10])}}">10</option>
                     <option @if ($perPage == 50)
                                 selected="selected"
-                            @endif value="{{route('userListings',['id' => $id,'perPage' => 50])}}">50</option>
+                            @endif value="{{route('perPage',['perPage' => 50])}}">50</option>
                 </select>
                 <div id="strony" class="flex m-2">
                     <div class="my-auto mr-4">elementów na stronie</div>

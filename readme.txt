@@ -25,14 +25,6 @@ npm run build
 // Zmiana statusu zamówienia i transakcji po 5 minutach oczekiwania
 php artisan queue:work
 
-// instalacja broadcastowanya
-php artisan install:broadcasting
-  - instaluj reverb
-  - instaluj zależności
-  
-uruchom php artisan reverb:start --port=8001 (wybierz port albo wcale nie dawaj jak działa bez)
-
-
 
 //idk, żeby tailwind działał
 //skrypt w package.json
@@ -41,9 +33,6 @@ uruchom php artisan reverb:start --port=8001 (wybierz port albo wcale nie dawaj 
 npm run watch
 //uruchomić drugą konsolę
 php artisan serve
-
-//widoki paginacji
-php artisan vendor:publish --tag=laravel-pagination
 
 //mail  w.env
 zróbcie konto na mailtrapie i skopiujcie PHP->laravel 9+ do .env
@@ -67,7 +56,7 @@ sb-a3jpd33473419@personal.example.com
 GW}$F3?g
 
 
-nr grupy i nr zespołu nazwa pliku do wysłania
+
 
 
 
