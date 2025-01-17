@@ -9,17 +9,33 @@
                 <p class="text-2xl m-auto mr-4">Cena: <span class="goldText">{{$item->price}}</span> zł</p>
                 <div class="p-2 flex justify-center">
                     <button class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded" id='kup'>Zakup</button>
-                    <button onclick="location.href='{{route('message')}}'" class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded">Wyślij wiadomość</button>
+                    <button class="m-4 p-1 bg-amber-300 text-black border-amber-400 border-2 rounded"id="messageButton">Skontaktuj się</button>
                     {{-- bool canFlag: true->może flagować; false->nie może flagować; --}}
                     <button {{!$canFlag ? 'disabled' : ''}} class="m-4 p-1 {{!$canFlag ? 'bg-gray-400' : 'bg-red-500'}} text-black border-amber-600 border-2 rounded" id="reportButton">{{!$canFlag ? "Zgłosiłeś ogłoszenie" : "Zgłoś ogłoszenie"}}</button>
                     {{-- <button onclick="location.href='{{route('listing.flag',['id' => $item->id])}}'" class="m-4 p-1 bg-amber-300 text-black border-emerald-600 border-2 rounded" id='flag'>Oflaguj</button> --}}
                 </div>
-                <div id="flagForm" class="bg-slate-700 rounded mx-auto" hidden>
+                <div id="flagForm" class="bg-gray-400/25 dark:bg-slate-700 rounded mx-auto" hidden>
                     <form class="pl-4 flex flex-row justify-center items-center" action="{{ route('listing.flag', $item->id) }}" method="POST">
                         @csrf
                         <label for="reason">Powód zgłoszenia: </label>
-                        <textarea class="m-2 text-black rounded" name="reason" id="reason" required></textarea>
+                        {{-- <textarea class="m-2 text-black rounded" name="reason" id="reason" required></textarea> --}}
+                        <select class="m-2 text-black rounded" name="reason" id="reason" required>
+                            <option value="spam">Spam</option>
+                            <option value="nieprzyzwoite">Nieprzyzwoite treści</option>
+                            <option value="powielone ogłoszenie">Powielone ogłoszenie</option>
+                            <option value="próba oszustwa">Próba oszustwa</option>
+                            <option value="inne">Inny</option>
+                        </select>
                         <button class="m-4 p-1 bg-red-500 text-black border-amber-600 border-2 rounded" type="submit">Potwierdź zgłoszenie</button>
+                    </form>
+                </div>
+                <div id="messageForm" class="bg-gray-400/25 dark:bg-slate-700 rounded mx-auto" hidden>
+                    <form class="pl-4 flex flex-row justify-center items-center" action="{{ route('send') }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="rec_id" name="rec_id" value="{{$item->user->id}}">
+                        <label for="message">Wiadomość: </label>
+                        <textarea class="defaultInput dark:hover:bg-gray-600/50 m-2 text-black" name="message" id="message" rows="3" required></textarea>
+                        <button class="m-4 p-1 bg-amber-500 text-black border-amber-600 border-2 rounded" type="submit">Wyślij wiadomość</button>
                     </form>
                 </div>
                 <p class="pt-2 text-right text-sm">Ogłoszenie utworzono: {{$item->created_at}}</p>
@@ -54,27 +70,44 @@
             </table>
         @endif
         @endrole
-        <!--
-        <form action="{{ route('send') }}" method="POST">
-            @csrf
-            <div>
-                <input type="hidden" id="recipient" name="recipient_mail" value="{{$item->user->email}}">
-            </div>
-            <div>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message"></textarea>
-            </div>
-            <button type="submit">Send</button>
-        </form>
-        -->
+        {{-- <div class="p-4">
+            <form action="{{ route('send') }}" method="POST">
+                @csrf
+                <input type="hidden" id="rec_id" name="rec_id" value="{{$item->user->id}}">
+                <div>
+                    <h1><label for="message">Skontaktuj się</label></h1>
+                    <textarea class="defaultInput hover:bg-gray-200" id="message" name="message"></textarea>
+                </div>
+                <button class="p-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-xl" type="submit">Send</button>
+            </form>
+        </div> --}}
     </div>
 
     @if($errors->any())
-    <h4>{{$errors->first()}}</h4>
+    <div class="centerDiv mt-4"><h4>{{$errors->first()}}</h4></div>
     @endif
     <script>
         document.getElementById('reportButton').addEventListener('click', function (){
-            document.getElementById('flagForm').removeAttribute('hidden');
+            if(!document.getElementById('messageForm').hasAttribute('hidden')){
+                document.getElementById('messageForm').setAttribute('hidden', true);
+            }
+            if(document.getElementById('flagForm').hasAttribute('hidden')){
+                document.getElementById('flagForm').removeAttribute('hidden');
+            }
+            else{
+                document.getElementById('flagForm').setAttribute('hidden', true);
+            }
+        });
+        document.getElementById('messageButton').addEventListener('click', function (){
+            if(!document.getElementById('flagForm').hasAttribute('hidden')){
+                document.getElementById('flagForm').setAttribute('hidden', true);
+            }
+            if(document.getElementById('messageForm').hasAttribute('hidden')){
+                document.getElementById('messageForm').removeAttribute('hidden');
+            }
+            else{
+                document.getElementById('messageForm').setAttribute('hidden', true);
+            }
         });
         document.getElementById('kup').addEventListener('click', function() {
             window.location.href = "{{ route('paypal.createPayment') }}?Id=" + {{$item->id}};

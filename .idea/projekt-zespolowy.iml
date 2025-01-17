@@ -128,6 +128,20 @@
       <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/srmklive/paypal" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/clue/redis-protocol" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/clue/redis-react" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/evenement/evenement" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/laravel/reverb" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/paragonie/sodium_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/pusher/pusher-php-server" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/ratchet/rfc6455" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/dns" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/event-loop" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/promise-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/socket" />
+      <excludeFolder url="file://$MODULE_DIR$/Aledrogo/vendor/react/stream" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

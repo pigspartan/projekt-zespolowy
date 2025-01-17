@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Events\PurchaseMade;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Listing;
 use App\Models\User;
@@ -51,11 +53,13 @@ class ListingController extends Controller
             ->where('listings.user_id', $id)
             ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
             ->groupBy('listings.id')
-            ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
+            ->having('flagged_count', '<', 6)
+            ->where('status','!=','sold')
+            ->latest()->paginate($perPage);
 
         $name = User::findOrFail($id)->name;
 
-        return view('userListings', ['listings' => sizeof($listings) > 0 ? $listings : null, 'userName' => $name, 'perPage' => $perPage]);
+        return view('userListings', ['listings' => sizeof($listings) > 0 ? $listings : null, 'id' => User::findOrFail($id)->id,'userName' => $name, 'perPage' => $perPage]);
     }
 
     /**

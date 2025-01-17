@@ -4,7 +4,7 @@
     @endauth
 
 @if (session('error'))
-    <div class="alert alert-danger">
+    <div class="centerDiv mt-4 alert alert-danger">
         {{ session('error') }}
     </div>
 @endif
@@ -22,7 +22,7 @@
             <div class="flex ml-auto">
                 <div class="mt-auto mr-2 mb-auto flex">
                     <p class="text-2xl m-auto mr-4">Cena: <span class="goldText">{{$item->price}}</span> zł</p>
-                    <button onclick="location.href='{{route('itemDetails',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl px-2 h-12 bg-amber-300 hover:bg-amber-500 text-black">Szczegóły</button>
+                    <button onclick="location.href='{{route('itemDetails',['id' => $item->getKey()])}}'" class="border-2 hover:border-black rounded-3xl px-2 h-12 bg-amber-300 hover:bg-amber-500 text-black transition">Szczegóły</button>
                 </div>
             </div>
         </div>

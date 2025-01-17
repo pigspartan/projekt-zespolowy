@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="{{ isset($_COOKIE['theme']) ? ($_COOKIE['theme'] === 'dark' ? 'dark' : '' ): ''}}" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +7,14 @@
     <title>{{ env('APP_NAME') }}</title>
     @vite(['resources/css/app.css'])
     @vite(['resources/js/lightdarkmode.js'])
+    @vite(['resources/js/echo.js'])
 </head>
+
 <body>
     <header>
         <nav aria-label="Global">
-            <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="{{URL::asset('/img/glorp.jpg')}}" alt="glorp logo" class="h-12"/>
+            <a href="{{ route('index') }}" class="flex items-center space-x-3 rtl:space-x-reverse ml-8">
+                <img src="{{ URL::asset('/img/glorp.jpg') }}" alt="glorp logo" class="h-12" />
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">GlorpCorp©™</span>
             </a>
             @guest
@@ -24,27 +26,30 @@
             @endguest
             @auth
                 <div class="flex items-start">
-                    <button class="navButton" onclick="location.href='{{route('index')}}'">Ogłoszenia</button>
-                    <button class="navButton" onclick="location.href='{{route('listItem')}}'">Dodaj ogłoszenie</button>
+                    <button class="navButton" onclick="location.href='{{ route('index') }}'">Ogłoszenia</button>
+                    <button class="navButton" onclick="location.href='{{ route('listItem') }}'">Dodaj ogłoszenie</button>
                     <form action="{{ route('paypal.payout') }}" method="POST">
                         @csrf
                         <button type="submit" class="navButton">Wypłata</button>
                     </form>
                     @role('Admin')
-                        <button class="navButton" onclick="location.href='{{route('admin.dashboard')}}'">Admin dashboard</button>
+                        <button class="navButton" onclick="location.href='{{ route('admin.dashboard') }}'">Admin
+                            dashboard</button>
                     @endrole
-                    <button class="navButton" onclick="location.href='{{route('transactions.userTransactions', ['id' => auth()->id()])}}'">Twoje transakcje</button>
-                    <button class="navButton" onclick="location.href='{{route('message')}}'">Wiadomości</button>
+                    <button class="navButton"
+                        onclick="location.href='{{ route('transactions.userTransactions', ['id' => auth()->id()]) }}'">Twoje
+                        transakcje</button>
+                    <button class="navButton" onclick="location.href='{{ route('message') }}'">Wiadomości</button>
                 </div>
-                <div class="flex items-end space-x-3 rtl:space-x-reverse">
+                <div class="flex items-end space-x-3 rtl:space-x-reverse mr-8">
                     <button id="toggleMode"></button>
-                    <p class="bigButton"><a href="{{route('dashboard')}}">{{auth()->user()->name}}</a></p>
+                    <p class="bigButton"><a href="{{ route('dashboard') }}">{{ auth()->user()->name }}</a></p>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="smallButton">Logout</button>
                     </form>
                     @role('Suspended')
-                    <a class="text-red-600 text-sm" href="{{route('suspended')}}">Suspended</a>
+                        <a class="text-red-600 text-sm" href="{{ route('suspended') }}">Suspended</a>
                     @endrole
                 </div>
             @endauth
@@ -62,5 +67,12 @@
         </nav>
     </footer> --}}
 </body>
-
 </html>
+
+<script>
+    window.onload = (event) => {
+        window.Echo.private('users.' + {{auth()->id()}}).listen('PurchaseMade', (event) => {
+            console.log(event);
+        })
+    };
+</script>
