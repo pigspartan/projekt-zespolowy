@@ -33,13 +33,17 @@ public function sm()
     $temp2= auth()->user()->sentMessages()->get();
     $usersid = array();
     foreach($temp as $value){
-        array_push($usersid,$value->rec_id);
+        array_push($usersid,$value->sender_id);
     }
+
     foreach($temp2 as $value){
         array_push($usersid,$value->recipient_id);
     }
+    //dd($usersid);
     $usersid=array_unique($usersid);
+
     array_shift($usersid);
+
     $usersout = array();
 
     foreach($usersid as $value){
