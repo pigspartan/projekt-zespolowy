@@ -82,7 +82,7 @@ nav {
     @apply mr-2 text-2xl
 }
 .defaultInput{
-    @apply hover:bg-white/50 border-black border rounded pl-2 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-700/50 basis-full transition
+    @apply hover:bg-slate-200/50 border-black border rounded pl-2 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-700/50 basis-full transition
 }
 .formElement {
     @apply text-xl max-w-screen-md flex flex-wrap items-center justify-between p-4
