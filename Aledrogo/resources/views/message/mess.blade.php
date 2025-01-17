@@ -13,6 +13,7 @@
                 <label class="mr-2" for="recipient">Odbiorca:</label>
                 {{-- <input class="text-black rounded basis-full" type="text" id="recipient" name="recipient_mail"> --}}
                 <input type="hidden" id="recipient" name="rec_id" value="{{$cid}}">
+
             </div>
             <div class="flex">
                 <label class="mr-2" for="message">Treść:</label>
@@ -30,7 +31,7 @@
                 <strong>user</strong> {{ $usersout->name }}
                 <form action="{{ route('chose') }}" method="POST">
                     @csrf
-                    <input type="hidden" id="sender" name="sender" value="{{$usersout->id}}">
+                    <input type="hidden" id="rec_id" name="rec_id" value="{{$usersout->id}}">
                     <button type="submit">Send</button>
                 </form>
             </li>
