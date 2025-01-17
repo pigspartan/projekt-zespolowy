@@ -4,7 +4,7 @@
     @endauth
 
 @if (session('error'))
-    <div class="alert alert-danger">
+    <div class="centerDiv mt-4 alert alert-danger">
         {{ session('error') }}
     </div>
 @endif
