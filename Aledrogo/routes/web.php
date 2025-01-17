@@ -71,7 +71,11 @@ use App\Http\Controllers\PayPalController;
 
 Route::get('/paypal/create-payment', [PayPalController::class, 'createPayment'])->name('paypal.createPayment');
 Route::get('/paypal/capture-payment', [PayPalController::class, 'capturePayment'])->name('paypal.capturePayment');
+Route::get('/paypal/cancel-payment', [PayPalController::class, 'cancelPayment'])->name('paypal.cancelPayment');
+Route::get('/paypal/resume-payment/{listingId}{transactionId}', [PayPalController::class, 'resumePayment'])->name('paypal.resumePayment');
+
 Route::post('/paypal/payout', [PayPalController::class, 'sendPayout'])->name('paypal.payout');
 Route::post('/send', [MessageController::class, 'sendMessage'])->name('send');
 #Route::view('/message', 'message.mess')->name('message');
 Route::get('/message', [MessageController::class, 'showMessages'])->name('message');
+Route::post('/chose', [MessageController::class, 'chosenchat'])->name('chose');

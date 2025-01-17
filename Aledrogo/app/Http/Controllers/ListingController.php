@@ -31,7 +31,8 @@ class ListingController extends Controller
             ->selectRaw('COUNT(flagged_listings.id) as flagged_count')
             ->having('user_role.role_id', '!=', 3)
             ->groupBy('listings.id')
-            ->having('flagged_count', '<', 6)->latest()->paginate($perPage);
+            ->having('flagged_count', '<', 6)
+            ->where('status','!=','sold')->latest()->paginate($perPage);
 
 
 

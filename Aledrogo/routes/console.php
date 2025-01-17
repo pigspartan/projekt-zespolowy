@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Schedule;
 
 Schedule::call(function () {
     DB::table('listings')->where('status', 'reserved')
-        ->where('updated_at', '<', Carbon::now()->subMinutes(3))
+        ->where('updated_at', '<', Carbon::now()->subMinutes(5))
         ->update([
             'status' => 'available',
             'updated_at' => Carbon::now(),

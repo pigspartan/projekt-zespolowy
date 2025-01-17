@@ -22,7 +22,8 @@ php artisan db:seed --class=RoleSeeder
 npm install -D tailwindcss postcss autoprefixer
 npm run build
 
-
+// Zmiana statusu zamówienia i transakcji po 5 minutach oczekiwania
+php artisan queue:work
 
 
 //idk, żeby tailwind działał

@@ -21,8 +21,10 @@ const toggleButton = document.getElementById("toggleMode");
 toggleButton.addEventListener("click", () => toggleDarkMode());
 
 if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
     toggleButton.innerHTML = "Tryb jasny";
 } else {
+    document.documentElement.classList.remove('dark');
     toggleButton.innerHTML = "Tryb ciemny";
 }
 
