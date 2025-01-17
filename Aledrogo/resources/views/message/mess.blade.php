@@ -16,7 +16,7 @@
 
                     <ul class="space-y-2">
                         @foreach ($usersout as $user)
-                            <li 
+                            <li
                                 class="transition p-2 bg-gray-200 dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-gray-700 rounded cursor-pointer"
                                 onclick="submitForm('{{ $user->id }}')"
                             >
@@ -24,13 +24,13 @@
                             </li>
                         @endforeach
                     </ul>
-                    
+
                     <!-- Formularz ukryty -->
                     <form id="userForm" action="{{ route('chose') }}" method="POST" class="hidden">
                         @csrf
                         <input type="hidden" id="sender" name="sender" value="">
                     </form>
-                    
+
                     <script>
                         function submitForm(userId) {
                             // Ustaw wartość pola ukrytego
@@ -87,20 +87,20 @@
                     @csrf
                     <div class="flex items-center gap-2">
                         <input type="hidden" id="recipient" name="rec_id" value="{{ $cid }}">
-                        <input 
-                            id="message" 
-                            name="message" 
-                            type="textarea" 
-                            placeholder="Napisz wiadomość..." 
+                        <input
+                            id="message"
+                            name="message"
+                            type="textarea"
+                            placeholder="Napisz wiadomość..."
                             class="flex-1 p-3 border rounded-l-lg defaultInput">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="px-4 py-3 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 transition">
                             Wyślij
                         </button>
                     </div>
                 </form>
-                
+
                 @endif
             </div>
         </div>
